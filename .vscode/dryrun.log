@@ -1,0 +1,6 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/hsnayrus/leetcode'
+make: Leaving directory '/home/hsnayrus/leetcode'
+ 
+make: *** No targets specified and no makefile found.  Stop.
+
