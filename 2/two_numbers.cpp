@@ -13,5 +13,12 @@ struct ListNode {
 
 class Solution {
  public:
-  ListNode * addTwoNumbers(ListNode * l1, ListNode * l2) {}
+  ListNode * addTwoNumbers(ListNode * l1, ListNode * l2) {
+    int temp = 0;
+    ListNode * newHead;
+    ListNode * tempL1 = l1;
+    ListNode * tempL2 = l2;
+    while (true) {
+    }
+  }
 };
