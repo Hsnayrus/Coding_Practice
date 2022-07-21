@@ -1,0 +1,8 @@
+{
+    "makefile.extensionOutputFolder": "./.vscode",
+    "files.associations": {
+        "*.leaf": "html",
+        "*.stencil": "html",
+        "vector": "cpp"
+    }
+}
