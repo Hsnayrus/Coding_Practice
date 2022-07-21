@@ -6,23 +6,17 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
-make: *** No rule to make target `all'.  Stop.
 
-
-# Make data base, printed on Wed Jul 20 08:19:37 2022
+# Make data base, printed on Thu Jul 21 12:18:16 2022
 
 # Variables
 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
 ?F = $(notdir $?)
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
-VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # environment
@@ -42,19 +36,13 @@ _ = /usr/bin/make
 # makefile
 MAKEFILE_LIST := 
 # environment
-VSCODE_VERBOSE_LOGGING = true
-# environment
 __CFBundleIdentifier = com.microsoft.VSCode
-# environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/ll/2mjdzq7905x1q8thwn5bmxxh0000gn/T/vscode-ipc-d003fa97-5a5a-4b25-a8c2-0bc86c99269c.sock
 # environment
 VSCODE_CWD = /Users/loaner/LCPractice
 # environment
 PATH = /opt/homebrew/bin:/Users/loaner/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin
 # environment
 LSCOLORS = ExFxBxDxCxegedabagacad
-# environment
-VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
@@ -63,8 +51,6 @@ ELECTRON_RUN_AS_NODE = 1
 SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.fCqpMuUkhg/Listeners
 # automatic
 %F = $(notdir $%)
-# environment
-VSCODE_PIPE_LOGGING = true
 # environment
 PWD = /Users/loaner/LCPractice
 # environment
@@ -78,11 +64,11 @@ MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/loaner/Library/Application Support/Code/CachedData/30d9c6cd9483b2cc586687151bcbcd635f373630
+VSCODE_CODE_CACHE_PATH = /Users/loaner/Library/Application Support/Code/CachedData/3b889b090b5ad5793f524b5d1d39fda662b96a2a
 # environment
 LOGNAME = loaner
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -116,7 +102,9 @@ TMPDIR = /var/folders/ll/2mjdzq7905x1q8thwn5bmxxh0000gn/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/loaner/Library/Application Support/Code/1.68.1-main.sock
+VSCODE_IPC_HOOK = /Users/loaner/Library/Application Support/Code/1.69.2-main.sock
+# environment
+MallocNanoZone = 0
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -126,7 +114,7 @@ MFLAGS = -Rrqp
 # environment
 TERM_PROGRAM_VERSION = 445
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.10419397.10419403.CF37C0C7-3C5A-4CD3-8280-5D9F3B6B53BF
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.12543812.12543818.5612FD68-8C5C-4758-94EC-B3FD3556FF5B
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -156,12 +144,11 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 67938
+VSCODE_PID = 69598
 # variable set hash-table stats:
-# Load=71/1024=7%, Rehash=0, Collisions=1/92=1%
+# Load=67/1024=7%, Rehash=0, Collisions=1/88=1%
 
 # Pattern-specific Variable Values
- 
 
 # No pattern-specific variable values.
 
@@ -241,6 +228,8 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Wed Jul 20 08:19:37 2022
+# Finished Make data base on Thu Jul 21 12:18:16 2022
 
  
+make: *** No rule to make target `all'.  Stop.
+
