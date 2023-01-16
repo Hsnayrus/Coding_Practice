@@ -20,8 +20,29 @@ Average salary excluding minimum and maximum salary is (2000) / 1 = 2000
  
 Leetcode Question Number: 1491
 """
+from typing import *
 
 
 class Solution:
     def average(self, salary: List[int]) -> float:
-        return 1.0
+        min = salary[0]
+        max = salary[1]
+        if min > max:
+            temp = min
+            min = max
+            max = temp
+        total = 0
+        for number in salary[2:]:
+            if number < min:
+                print("Adding {}".format(min))
+                total = total + min
+                min = number
+            elif number > max:
+                print("Adding {}".format(max))
+                total = total + max
+                max = number
+            else:
+                print("Adding {}".format(number))
+                total = total + number
+        return total/(len(salary) - 2)
+# [4000,3000,1000,2000]
