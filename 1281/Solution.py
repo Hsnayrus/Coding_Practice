@@ -25,4 +25,15 @@ Leetcode Question: 1281
 
 class Solution:
     def subtractProductAndSum(self, n: int) -> int:
-        return 0
+        product = 1
+        sum = 0
+        if n == 0:
+            return 0
+        while True:
+            if n == 0:
+                break
+            r = n % 10
+            product = product * r
+            sum = sum + r
+            n = int(n / 10)
+        return product - sum
