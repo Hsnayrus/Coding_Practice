@@ -2,7 +2,7 @@ import pytest
 
 
 @pytest.mark.parametrize("n, expected", [
-    (0, 0)
+    (3, 0)
 ])
 def test_hammingWeight(n, expected):
     from Solution import Solution

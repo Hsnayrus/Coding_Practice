@@ -37,4 +37,13 @@ Leetcode Question: 191
 
 class Solution:
     def hammingWeight(self, n: int) -> int:
-        return 0
+        count = 1
+        if n == 0:
+            return 0
+        while True:
+            if n == 1:
+                break
+            elif n % 2:
+                count = count + 1
+            n = int(n / 2)
+        return count
