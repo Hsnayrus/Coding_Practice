@@ -26,8 +26,25 @@ Explanation: There are no valid points.
 Leetcode Question: 1779
 """
 from typing import *
+import math
 
 
 class Solution:
+    def getManhattanDistance(self, x1: int, y1: int, x2: int, y2: int) -> int:
+        return abs(x1 - x2) + abs(y1 - y2)
+
+    def isAValidPoint(self, x: int, y: int, currentPoint: List[int]) -> bool:
+        if x == currentPoint[0] or y == currentPoint[1]:
+            return True
+        return False
+
     def nearestValidPoint(self, x: int, y: int, points: List[List[int]]) -> int:
-        return 0
+        smallest_distance = 65535
+        result_index = -1
+        for point in points:
+            if self.isAValidPoint(x, y, point):
+                distance = self.getManhattanDistance(x, y, point[0], point[1])
+                if distance < smallest_distance or smallest_distance == 65535:
+                    smallest_distance = distance
+                    result_index = points.index(point)
+        return result_index
