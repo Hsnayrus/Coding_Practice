@@ -34,8 +34,15 @@ Constraints:
 
 Leetcode Question: 1822
 """
+from typing import *
 
 
 class Solution:
     def arraySign(self, nums: List[int]) -> int:
-        return 0
+        result = 1
+        for number in nums:
+            if number == 0:
+                return 0
+            elif number < 0:
+                result = result * -1
+        return result
