@@ -31,8 +31,27 @@ Constraints:
 
 Leetcode Question: 202
 """
+from typing import *
 
 
 class Solution:
+    def numberToSumOfSquaredDigits(self, n: int) -> int:
+        temp = n
+        result = 0
+        while True:
+            if n < 1:
+                break
+            result = result + ((n % 10) * (n % 10))
+            n = int(n / 10)
+        return result
+
     def isHappy(self, n: int) -> bool:
-        return False
+        values_travelled = set()
+        while n != 1 and n not in values_travelled:
+            values_travelled.add(n)
+            # Repeat the process until the number equals 1
+            # Numbers ending in 1 are happy numbers
+            # Replace the number with the sum of squares of its digits
+            n = self.numberToSumOfSquaredDigits(n)
+        # Return True if number is happy, False if not
+        return n == 1
