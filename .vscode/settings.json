@@ -3,6 +3,7 @@
     "files.associations": {
         "*.leaf": "html",
         "*.stencil": "html",
-        "vector": "cpp"
+        "vector": "cpp",
+        "iostream": "cpp"
     }
 }
