@@ -25,24 +25,31 @@ Constraints:
 
 
 class Solution:
-    def generateNthRow(self, row: int, pTriangle: List[List[int]]):
-        tempList = [1]
-        for i in range(0, row - 1):
-            tempList.append(pTriangle[row - 1][i] + pTriangle[row - 1][i + 1])
-        tempList.append(1)
+    def generateElement(self, row: int, column: int) -> int:
+        # Assuming that row and column are 0-indexed
+        result = 1
+        for i in range(0, column):
+            result = result * (row - i)
+            result = result / (i + 1)
+        return int(result)
+
+    def generateRow(self, rowNumber: int) -> List[int]:
+        result = 1
+        tempList = []
+        tempList.append(result)
+        for i in range(1, rowNumber):
+            result = result * (rowNumber - i)
+            result = result / i
+            tempList.append(int(result))
         return tempList
 
     def generate(self, numRows: int) -> List[List[int]]:
-        pTList = [[1]]
-        if numRows == 1:
-            return pTList
-        pTList.append([1, 1])
-        if numRows > 2:
-            for i in range(2, numRows):
-                pTList.append(self.generateNthRow(i, pTList))
+        pTList = []
+        for row in range(1, numRows + 1):
+            pTList.append(self.generateRow(row))
         return pTList
 
 
 if __name__ == "__main__":
     s1 = Solution()
-    print(s1.generate(1))
+    print(s1.generate(6))
