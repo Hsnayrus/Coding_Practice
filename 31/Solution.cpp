@@ -45,28 +45,7 @@ class Solution {
         std::cout << "\n";
     }
     void nextPermutation(std::vector<int>& nums) {
-        std::vector<std::vector<int> > allPermutations;
-        std::vector<int> temp(nums);
-        std::sort(temp.begin(), temp.end());
-
-        allPermutations = findAllPermutations(temp);
-        // Print all Permutations
-
-        for (size_t i = 0; i < allPermutations.size(); i++) {
-            printList(allPermutations[i]);
-        }
-
-        for (size_t i = allPermutations.size() - 1; i >= 0; i--) {
-            if (std::equal(nums.begin(), nums.end(),
-                           allPermutations[i].begin())) {
-                if (i == allPermutations.size() - 1) {
-                    nums = allPermutations[0];
-                } else {
-                    nums = allPermutations[i + 1];
-                }
-                break;
-            }
-        }
+        std::next_permutation(nums.begin(), nums.end());
     }
 };
 
