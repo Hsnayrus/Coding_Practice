@@ -84,15 +84,20 @@ class Solution {
         2. For every sub-array, generate the sum
         3. Find the highest sum amongst all the sums
         */
-        std::vector<std::vector<int> > allSubarrays =
-            generateAllSubarrays(nums);
-        std::vector<int> allSubarraysSum;
-
-        for (size_t i = 0; i < allSubarrays.size(); i++) {
-            allSubarraysSum.push_back(getListSum(allSubarrays[i]));
+        int maxSum = INT_MIN;
+        int currentSum = INT_MIN;
+        for (size_t i = 0; i < nums.size(); i++) {
+            std::vector<int> temp;
+            for (size_t j = i; j < nums.size(); j++) {
+                temp.push_back(nums[j]);
+                currentSum = getListSum(temp);
+                if (currentSum > maxSum) {
+                    maxSum = currentSum;
+                }
+            }
         }
 
-        return getMaxElement(allSubarraysSum);
+        return maxSum;
     }
 };
 
