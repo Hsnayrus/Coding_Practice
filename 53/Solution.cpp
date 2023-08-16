@@ -44,38 +44,6 @@ template <typename T> void printList(const std::vector<T>& list) {
 }
 
 class Solution {
-  private:
-    std::vector<std::vector<int> >
-    generateAllSubarrays(const std::vector<int>& nums) {
-        std::vector<std::vector<int> > allSubarrays;
-        for (size_t i = 0; i < nums.size(); i++) {
-            std::vector<int> temp;
-            for (size_t j = i; j < nums.size(); j++) {
-                temp.push_back(nums[j]);
-                allSubarrays.push_back(temp);
-            }
-        }
-        return allSubarrays;
-    }
-
-    int getListSum(const std::vector<int>& nums) {
-        int sum = 0;
-        for (size_t i = 0; i < nums.size(); i++) {
-            sum += nums[i];
-        }
-        return sum;
-    }
-
-    int getMaxElement(const std::vector<int>& nums) {
-        int max = INT_MIN;
-        for (size_t i = 0; i < nums.size(); i++) {
-            if (nums[i] > max) {
-                max = nums[i];
-            }
-        }
-        return max;
-    }
-
   public:
     int maxSubArray(std::vector<int>& nums) {
         /*
@@ -85,12 +53,10 @@ class Solution {
         3. Find the highest sum amongst all the sums
         */
         int maxSum = INT_MIN;
-        int currentSum = INT_MIN;
         for (size_t i = 0; i < nums.size(); i++) {
-            std::vector<int> temp;
+            int currentSum = 0;
             for (size_t j = i; j < nums.size(); j++) {
-                temp.push_back(nums[j]);
-                currentSum = getListSum(temp);
+                currentSum += nums[j];
                 if (currentSum > maxSum) {
                     maxSum = currentSum;
                 }
