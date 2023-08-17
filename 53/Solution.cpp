@@ -47,22 +47,22 @@ class Solution {
   public:
     int maxSubArray(std::vector<int>& nums) {
         /*
-        Brute Force Approach:
-        1. Generate all sub-arrays
-        2. For every sub-array, generate the sum
-        3. Find the highest sum amongst all the sums
+                Optimal Solution
         */
-        int maxSum = INT_MIN;
-        for (size_t i = 0; i < nums.size(); i++) {
-            int currentSum = 0;
-            for (size_t j = i; j < nums.size(); j++) {
-                currentSum += nums[j];
-                if (currentSum > maxSum) {
-                    maxSum = currentSum;
-                }
+        int maxSum = nums[0];
+        int currentSum = nums[0];
+        if (nums.size() == 1) {
+            return currentSum;
+        }
+        for (size_t i = 1; i < nums.size(); i++) {
+            if (currentSum < 0) {
+                currentSum = 0;
+            }
+            currentSum += nums[i];
+            if (maxSum < currentSum) {
+                maxSum = currentSum;
             }
         }
-
         return maxSum;
     }
 };
@@ -72,7 +72,12 @@ int main() {
     std::vector<int> nums;
     nums.push_back(1);
     nums.push_back(2);
-    nums.push_back(3);
-    nums.push_back(4);
-    s1.maxSubArray(nums);
+    // nums.push_back(-3);
+    // nums.push_back(12);
+    // nums.push_back(-11);
+    // nums.push_back(-13);
+    // nums.push_back(14);
+    // nums.push_back(5);
+    // nums.push_back(-2);
+    std::cout << s1.maxSubArray(nums) << std::endl;
 }
