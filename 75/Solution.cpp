@@ -36,6 +36,20 @@ Follow up: Could you come up with a one-pass algorithm using only constant extra
 space?
 */
 class Solution {
+  private:
+    template <typename T>
+    void pushToFront(std::vector<T>& nums, std::vector, T element) {}
+
   public:
-    void sortColors(std::vector<int>& nums) {}
+    void sortColors(std::vector<int>& nums) {
+        size_t last0Index = SIZE_T_MAX;
+        for (size_t i = 0; i < nums.size(); i++) {
+            if (nums[i] == 2) {
+                continue;
+            } else if (nums[i] == 1) {
+                if (last0Index == SIZE_T_MAX) {
+                }
+            }
+        }
+    }
 };
