@@ -36,6 +36,43 @@ Constraints:
 */
 
 class Solution {
+  private:
+    size_t findHighestElementIndex(size_t startIndex,
+                                   std::vector<int>& prices) {
+        size_t maxElementIndex = startIndex;
+        for (size_t i = startIndex; i < prices.size(); i++) {
+            if (prices[maxElementIndex] < prices[i]) {
+                maxElementIndex = i;
+            }
+        }
+        return maxElementIndex;
+    }
+
   public:
-    int maxProfit(std::vector<int>& prices) {}
+    int maxProfit(std::vector<int>& prices) {
+        int currentDifference = 0;
+        int maxDifference = 0;
+        for (size_t i = 0; i < prices.size(); i++) {
+            currentDifference =
+                prices[findHighestElementIndex(i, prices)] - prices[i];
+            if (maxDifference < currentDifference) {
+                maxDifference = currentDifference;
+            }
+        }
+        return maxDifference;
+    }
 };
+
+int main() {
+    Solution s1;
+    std::vector<int> prices;
+    prices.push_back(7);
+    prices.push_back(1);
+    prices.push_back(5);
+    prices.push_back(3);
+    prices.push_back(6);
+    prices.push_back(4);
+    // prices.push_back();
+    // prices.push_back();
+    std::cout << s1.maxProfit(prices) << std::endl;
+}
