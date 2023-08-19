@@ -36,27 +36,27 @@ Constraints:
 */
 
 class Solution {
-  private:
-    size_t findHighestElementIndex(size_t startIndex,
-                                   std::vector<int>& prices) {
-        size_t maxElementIndex = startIndex;
-        for (size_t i = startIndex; i < prices.size(); i++) {
-            if (prices[maxElementIndex] < prices[i]) {
-                maxElementIndex = i;
-            }
-        }
-        return maxElementIndex;
-    }
 
   public:
     int maxProfit(std::vector<int>& prices) {
-        int currentDifference = 0;
+        int currentDifference = INT_MIN;
         int maxDifference = 0;
-        for (size_t i = 0; i < prices.size(); i++) {
-            currentDifference =
-                prices[findHighestElementIndex(i, prices)] - prices[i];
-            if (maxDifference < currentDifference) {
-                maxDifference = currentDifference;
+        int boughtAt = prices[0];
+        int soldAt = 0;
+        for (size_t i = 1; i < prices.size(); i++) {
+            soldAt = prices[i];
+            currentDifference = soldAt - boughtAt;
+            if (currentDifference < 0) {
+                boughtAt = prices[i];
+                continue;
+            } else {
+                if ((prices[i] < boughtAt) && (i != prices.size() - 1)) {
+                    boughtAt = prices[i];
+                } else {
+                    if (maxDifference < currentDifference) {
+                        maxDifference = currentDifference;
+                    }
+                }
             }
         }
         return maxDifference;
