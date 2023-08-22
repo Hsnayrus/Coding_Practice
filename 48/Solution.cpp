@@ -40,17 +40,16 @@ template <typename T> void printList(std::vector<T> list) {
 class Solution {
   public:
     void rotate(std::vector<std::vector<int> >& matrix) {
-        std::vector<std::vector<int> > newMatrix;
         for (size_t i = 0; i < matrix.size(); i++) {
-            newMatrix.push_back(std::vector<int>());
             for (size_t j = 0; j < matrix[i].size(); j++) {
-                newMatrix[i].push_back(matrix[i][j]);
+                if (j > i) {
+                    std::swap(matrix[i][j], matrix[j][i]);
+                }
             }
         }
-        size_t sizeRow = newMatrix.size() - 1;
-        for (size_t i = 0; i < newMatrix.size(); i++) {
-            for (size_t j = 0; j < newMatrix[i].size(); j++) {
-                matrix[i][j] = newMatrix[sizeRow - j][i];
+        for (size_t i = 0; i < matrix.size(); i++) {
+            for (size_t j = 0; j < (matrix[i].size() / 2); j++) {
+                std::swap(matrix[i][j], matrix[i][matrix[i].size() - j - 1]);
             }
         }
     }
