@@ -34,22 +34,14 @@ class Solution {
     merge(std::vector<std::vector<int> >& intervals) {
         std::vector<std::vector<int> > result;
         std::sort(intervals.begin(), intervals.end());
-
-        for (size_t i = 0; i < intervals.size(); i++) {
-            std::vector<int> current(intervals[i].begin(), intervals[i].end());
-            if (result.size() != 0 && current[0] <= result.back()[1]) {
-                continue;
+        result.push_back(intervals[0]);
+        size_t intervalsSize = intervals.size();
+        for (size_t i = 1; i < intervals.size(); i++) {
+            if (intervals[i][0] <= result.back()[1]) {
+                result.back()[1] = std::max(intervals[i][1], result.back()[1]);
+            } else {
+                result.push_back(intervals[i]);
             }
-            for (size_t j = i; j < intervals.size(); j++) {
-                if (intervals[j][0] <= current[1]) {
-                    if (intervals[j][1] > current[1]) {
-                        current[1] = intervals[j][1];
-                    }
-                } else {
-                    break;
-                }
-            }
-            result.push_back(current);
         }
         return result;
     }
