@@ -37,11 +37,10 @@ class Solution {
 
         for (size_t i = 0; i < intervals.size(); i++) {
             std::vector<int> current(intervals[i].begin(), intervals[i].end());
-            std::cout << "Result Size: " << result.size() << std::endl;
             if (result.size() != 0 && current[0] <= result.back()[1]) {
                 continue;
             }
-            for (size_t j = 0; j < intervals.size(); j++) {
+            for (size_t j = i; j < intervals.size(); j++) {
                 if (intervals[j][0] <= current[1]) {
                     if (intervals[j][1] > current[1]) {
                         current[1] = intervals[j][1];
