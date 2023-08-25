@@ -49,9 +49,47 @@ nums2.length == n
 
 
 Follow up: Can you come up with an algorithm that runs in O(m + n) time?
- */
+*/
+template <typename T> void printList(std::vector<T> list) {
+    for (typename std::vector<T>::iterator it = list.begin(); it != list.end();
+         ++it) {
+        std::cout << *it;
+        if (it != list.end()) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
+}
+
 class Solution {
   public:
     void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n) {
+        nums1.erase(nums1.begin() + m, nums1.end());
+        // If either is zero, return the other one.
+        if (nums1.size() == 0) {
+            nums1 = nums2;
+        } else {
+            for (size_t i = 0; i < n; i++) {
+                for (size_t j = 0; j < nums1.size(); j++) {
+                    if (nums2[i] < nums1[j]) {
+                        nums1.insert(nums1.begin() + j, nums2[i]);
+                        break;
+                    } else if (j == nums1.size() - 1) {
+                        nums1.push_back(nums2[i]);
+                        break;
+                    }
+                }
+            }
+        }
     }
 };
+
+int main() {
+    int array[] = {1};
+    int array2[] = {1};
+    std::vector<int> first(array, array + sizeof(array) / sizeof(int));
+    std::vector<int> second(array2, array2 + sizeof(array2) / sizeof(int));
+    Solution s1;
+    s1.merge(first, 3, second, 3);
+    printList(first);
+}
