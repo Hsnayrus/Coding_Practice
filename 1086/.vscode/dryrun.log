@@ -1,5 +1,0 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/loaner/LCPractice/GS/1086'
-g++ -o test high_five.cpp -std=gnu++11
-make: Leaving directory `/Users/loaner/LCPractice/GS/1086'
- 
