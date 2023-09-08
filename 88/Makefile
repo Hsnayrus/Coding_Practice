@@ -4,4 +4,4 @@ solution: Solution.cpp
 
 .PHONY: clean
 clean:
-	rm -rf *~ *.dSYM* solution *.cpp~ *.hpp~
+	rm -rf *~ *.dSYM* solution *.cpp~ *.hpp~ *.class
