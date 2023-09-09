@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Extra Extra:
+# 1. Create a Readme file in every solution folder
+# 1a. This Readme file can contain:
+# 1a1. Link to Problem
+# 1a2. Solution approaches to different types of solutions, brute-force, better, optimal
+
+
 # Arguments needed are:
 # 1. Leetcode(-lc) or Hackerrank(-hr)
 # 2. Number of problem
