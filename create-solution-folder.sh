@@ -8,7 +8,7 @@
 
 
 # Arguments needed are:
-# 1. Leetcode(-lc) or Hackerrank(-hr)
+# 1. Leetcode(-lc) or Hackerrank(-hr), other(-ran)
 # 2. Number of problem
 # 3. Title of problem(would be great if I could retrieve it myself
 # 4. Language in which I am planning to code said problem("flags or simple text. -cpp / 'cpp'")
