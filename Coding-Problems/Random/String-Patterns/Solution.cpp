@@ -28,4 +28,9 @@ maxVowels = 1
 
                 (5 * 21 * 21 * 5) + (21 * 5 * 21 * 5) + (5 * 21 * 21 * 5) =
 11025
+
+Since the output can be very long, return the answer modulo 1000000007
  */
+class Solution {
+    size_t getStringPatterns(int wordLen, int maxVowels) {}
+};
