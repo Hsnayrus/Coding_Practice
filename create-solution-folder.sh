@@ -6,11 +6,8 @@ bold_text=$(tput bold)
 normal_text=$(tput sgr0)
 
 # Script Variables
-proper_usage_string="${bold_text}Proper usage:${normal_text} 'create-solution-folder -lang cpp/python/java/swift -platform leetcode/hackerrank -problemNumber number -problemTitle(this is optional) title'"
-
 # Usage
-
-# create-solution-folder -lang cpp/python/java/swift -platform leetcode/hackerrank -problemNumber ### -problemTitle(this is optional) title 
+proper_usage_string="${bold_text}Proper usage:${normal_text} './create-solution-folder.sh -l cpp/python/java/swift -pf leetcode/hackerrank -n number -t title'"
 
 # Check number of command line arguments
 
