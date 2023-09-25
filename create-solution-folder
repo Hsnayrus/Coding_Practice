@@ -7,13 +7,30 @@ normal_text=$(tput sgr0)
 
 # Script Variables
 # Usage
-proper_usage_string="${bold_text}Proper usage:${normal_text} './create-solution-folder.sh -l cpp/python/java/swift -pf leetcode/hackerrank -n number -t title'"
+proper_usage_string="${bold_text}Proper usage:${normal_text} '${0} -l cpp/python/java/swift -pf leetcode/hackerrank -n number -t title'"
 
 # Check number of command line arguments
 
-if [ "$#" -lt 3 ]; then
+# Exit the program 
+if [ "$#" -lt 6 ]; then
     echo ${proper_usage_string}
+    exit 0
 fi
+
+while getopts l:pf:n:t: flag
+do
+    case "${flag}" in
+    	 l) language=${OPTARG};;
+	 pf) platform=${OPTARG};;
+	 n) problemNumber=${OPTARG};;
+	 t) problemTitle=${OPTARG};;
+    esac
+done
+
+echo "${language}"
+echo "${platform}"
+echo "${problemNumber}"
+echo "${problemTitle}"
 
 # Extra Extra:
 # 1. Create a Readme file in every solution folder
