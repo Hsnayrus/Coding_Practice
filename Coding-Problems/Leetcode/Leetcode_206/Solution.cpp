@@ -45,17 +45,20 @@ struct ListNode {
 };
 
 class Solution {
+  private:
+    ListNode * reverseListWorker(ListNode * head, ListNode * current) {
+        if ((current == nullptr) || (current->next == nullptr)) {
+            return head;
+        }
+        ListNode * temp = current->next;
+        current->next = temp->next;
+        temp->next = head;
+        head = temp;
+        return reverseListWorker(head, current);
+    }
+
   public:
     ListNode * reverseList(ListNode * head) {
-        if (head != nullptr) {
-            ListNode * current = head;
-            while (current->next != nullptr) {
-                ListNode * temp = current->next;
-                current->next = temp->next;
-                temp->next = head;
-                head = temp;
-            }
-        }
-        return head;
+        return reverseListWorker(head, head);
     }
-};     
+};
