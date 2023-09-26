@@ -7,7 +7,7 @@ normal_text=$(tput sgr0)
 
 # Script Variables
 # Usage
-proper_usage_string="${bold_text}Proper usage:${normal_text} '${0} -l cpp/python/java/swift -pf leetcode/hackerrank -n number -t title'"
+proper_usage_string="${bold_text}Proper usage:${normal_text} '${0} -l cpp/python/java/swift -pf leetcode/hackerrank/geeksforgeeks -n number -t title'"
 
 # Check number of command line arguments
 
