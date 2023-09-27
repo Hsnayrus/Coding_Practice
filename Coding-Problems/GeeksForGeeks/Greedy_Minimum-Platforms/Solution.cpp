@@ -50,3 +50,70 @@ Constraints:
 1 <= n <= 50000
 0000 <= A[i] <= D[i] <= 2359
  */
+
+typedef struct Schedule_Type {
+    int startTime;
+    int endTime;
+    int n;
+
+    Schedule_Type(int init_startTime, int init_endTime, int init_n) {
+        startTime = init_startTime;
+        endTime = init_endTime;
+        n = init_n;
+    }
+} schedule_t;
+
+bool comparator(schedule_t first, schedule_t second) {
+    if (first.endTime < second.endTime) {
+        return true;
+    } else if (first.endTime == second.endTime) {
+        return first.n < second.n;
+    } else {
+        return false;
+    }
+}
+class Solution {
+  public:
+    // Function to find the minimum number of platforms required at the
+    // railway station such that no train waits.
+    int findPlatform(int arr[], int dep[], int n) {
+        // Your code here
+        std::vector<schedule_t> newSchedule;
+        for (int i = 0; i < n; i++) {
+            schedule_t temp(arr[i], dep[i], i);
+            newSchedule.push_back(temp);
+        }
+        std::sort(newSchedule.begin(), newSchedule.end(), comparator);
+        std::vector<schedule_t>::iterator currentTiming = newSchedule.begin();
+        ++currentTiming;
+
+        int count = 1;
+
+        std::vector<int> limits;
+        limits.push_back(newSchedule[0].endTime);
+        while (currentTiming != newSchedule.end()) {
+            bool found = false;
+            for (int i = 0; i < limits.size(); i++) {
+                if ((*currentTiming).startTime > limits[i]) {
+                    found = true;
+                    limits[i] = (*currentTiming).endTime;
+                    break;
+                }
+            }
+            if (!found) {
+                limits.push_back((*currentTiming).endTime);
+                count++;
+            }
+            ++currentTiming;
+        }
+        return count;
+    }
+};
+
+int main() {
+    int n = 6;
+    int arr[6] = {900, 940, 950, 1100, 1500, 1800};
+    int dep[6] = {910, 1200, 1120, 1130, 1900, 2000};
+    Solution s1;
+    std::cout << "Count is: " << s1.findPlatform(arr, dep, n) << std::endl;
+}
