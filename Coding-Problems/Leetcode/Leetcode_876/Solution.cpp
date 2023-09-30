@@ -44,18 +44,12 @@ struct ListNode {
 class Solution {
   public:
     ListNode * middleNode(ListNode * head) {
-        ListNode * temp = head;
-        size_t count = 0;
-        while (temp != nullptr) {
-            count++;
-            temp = temp->next;
+        ListNode * slow = head;
+        ListNode * fast = head;
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        size_t middle = count / 2;
-        temp = head;
-        while (middle != 0) {
-            temp = temp->next;
-            middle--;
-        }
-        return temp;
+        return slow;
     }
 };
