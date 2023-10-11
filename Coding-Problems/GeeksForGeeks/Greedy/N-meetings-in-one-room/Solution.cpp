@@ -53,11 +53,59 @@ Constraints:
 1 ≤ N ≤ 105
 0 ≤ start[i] < end[i] ≤ 105
  */
+
+typedef struct meeting_tag {
+    int n;
+    int startTime;
+    int endTime;
+    meeting_tag(int init_n, int init_startTime, int init_endTime) {
+        n = init_n;
+        startTime = init_startTime;
+        endTime = init_endTime;
+    }
+} meeting_t;
+
+bool comparator(meeting_t first, meeting_t second) {
+    if (first.endTime == second.endTime) {
+        return first.n < second.n;
+    }
+    return first.endTime < second.endTime;
+}
+
+/*
+Create a struct with three elements: n, startTime and endTime
+Create a vector of this custom meeting type, call it schedule
+Sort this according in ascending order of endTime.
+Create a custom comparator for the sortin
+Declare a variable with the first endTime of schedult, call it currentEndTime
+Declare a variable called result, which stores the final result initialize it to
+1.
+Run a loop between 1 and schedule.size(), non inclusive, call it i.
+If the current meetings start time is > currentEndTime
+then increase count, assign currentEndTime as schedule[i].endTime
+return the result
+*/
+
 class Solution {
   public:
     // Function to find the maximum number of meetings that can
     // be performed in a meeting room.
     int maxMeetings(int start[], int end[], int n) {
         // Your code here
+        std::vector<meeting_t> schedule;
+        for (int i = 0; i < n; i++) {
+            schedule.push_back(meeting_t(i, start[i], end[i]));
+        }
+        std::sort(schedule.begin(), schedule.end(), comparator);
+
+        int result = 1;
+        int currentEndTime = schedule[0].endTime;
+        for (int i = 1; i < n; i++) {
+            if (schedule[i].startTime > currentEndTime) {
+                currentEndTime = schedule[i].endTime;
+                result++;
+            }
+        }
+        return result;
     }
 };
