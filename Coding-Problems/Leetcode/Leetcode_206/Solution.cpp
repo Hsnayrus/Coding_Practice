@@ -47,5 +47,36 @@ struct ListNode {
 class Solution {
   private:
   public:
-    ListNode * reverseList(ListNode * head) {}
+    ListNode * reverseList(ListNode * head) {
+        if (head == nullptr || head->next == nullptr) {
+            return head;
+        }
+        ListNode * last = reverseList(head->next);
+        head->next->next = head;
+        head->next = nullptr;
+        return last;
+    }
 };
+
+int main() {
+    ListNode * first5 = new ListNode(5);
+    ListNode * first4 = new ListNode(4, first5);
+    ListNode * first3 = new ListNode(3, first4);
+    ListNode * first2 = new ListNode(2, first3);
+    ListNode * first1 = new ListNode(1, first2);
+
+    Solution s1;
+    ListNode * newHead = s1.reverseList(first1);
+
+    ListNode * temp = newHead;
+    while (temp != nullptr) {
+        std::cout << temp->val;
+        if (temp->next != nullptr) {
+            std::cout << "->";
+        } else {
+            std::cout << std::endl;
+        }
+        temp = temp->next;
+    }
+    return 0;
+}
