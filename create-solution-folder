@@ -34,22 +34,28 @@ echo "${bold_text}ProblemTitle: ${normal_text}${problemTitle}"
 
 # Extra Extra:
 # 1. Create a Readme file in every solution folder
-# 1a. This Readme file can contain:
-# 1a1. Link to Problem
-# 1a2. Solution approaches to different types of solutions, brute-force, better, optimal
+#     a. This Readme file can contain:
+#         1. Link to Problem
+#         2. Solution approaches to different types of solutions, brute-force, better, optimal
 
 
 # Arguments needed are:
-# 1. Leetcode(-lc) or Hackerrank(-hr), other(-ran)
-# 2. Number of problem
-# 3. Title of problem(would be great if I could retrieve it myself
-# 4. Language in which I am planning to code said problem("flags or simple text. -cpp / 'cpp'")
+# 1. Platform
+#     a. -p followed by the platform
+# 2. Problem Number
+#     a. -n followed by a number
+#     b. This is optional since not all platforms have this
+# 3. Title of problem
+#     a. -t followed by the title
+# 4. Language
+#     a. -l followed by the language
+#     b. Template for this language should exist
 # 5. Extras:
-# 5a. Make code clean using software engineering principles
-# 5b. Check for all conditions of input
+#     a. Make code clean using software engineering principles
+#     b. Check for all conditions of input
 
 # Script is supposed to:
 # 1. Create a solution folder, in the appropriate repository, based on the given command line arguments
 # 2. Create a git branch if one doesnt exist already, based on input received
-# 2a. Checkout that branch depending on what branch I am currently in
-# Also check if folder/branch doesn't exist already
+#     a. Checkout that branch depending on what branch I am currently in
+#     b. Also check if folder/branch doesn't exist already
