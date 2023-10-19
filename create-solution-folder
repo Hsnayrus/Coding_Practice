@@ -7,30 +7,30 @@ normal_text=$(tput sgr0)
 
 # Script Variables
 # Usage
+# ${0} in case I change the name of this script in the future, I don't have to go in the code and change the proper usage string
 proper_usage_string="${bold_text}Proper usage:${normal_text} '${0} -l cpp/python/java/swift -pf leetcode/hackerrank/geeksforgeeks -n number -t title'"
 
-# Check number of command line arguments
+# Check number of command line arguments 
+# if [ "$#" -lt 6 ]; then
+#     echo ${proper_usage_string}
+#     # Exit the program
+#     exit 0
+# fi
 
-# Exit the program 
-if [ "$#" -lt 6 ]; then
-    echo ${proper_usage_string}
-    exit 0
-fi
-
-while getopts l:pf:n:t: flag
+while getopts l:p:n:t: flag
 do
     case "${flag}" in
-    	 l) language=${OPTARG};;
-	 pf) platform=${OPTARG};;
-	 n) problemNumber=${OPTARG};;
-	 t) problemTitle=${OPTARG};;
+	l) language=${OPTARG};;
+	p) platform=${OPTARG};;
+	n) problemNumber=${OPTARG};;
+	t) problemTitle=${OPTARG};;
     esac
 done
 
-echo "${language}"
-echo "${platform}"
-echo "${problemNumber}"
-echo "${problemTitle}"
+echo "${bold_text}Language: ${normal_text}${language}"
+echo "${bold_text}Platform: ${normal_text}${platform}"
+echo "${bold_text}ProblemNumber: ${normal_text}${problemNumber}"
+echo "${bold_text}ProblemTitle: ${normal_text}${problemTitle}"
 
 # Extra Extra:
 # 1. Create a Readme file in every solution folder
@@ -52,3 +52,4 @@ echo "${problemTitle}"
 # 1. Create a solution folder, in the appropriate repository, based on the given command line arguments
 # 2. Create a git branch if one doesnt exist already, based on input received
 # 2a. Checkout that branch depending on what branch I am currently in
+# Also check if folder/branch doesn't exist already
