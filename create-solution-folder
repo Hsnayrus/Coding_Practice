@@ -10,27 +10,31 @@ normal_text=$(tput sgr0)
 # ${0} in case I change the name of this script in the future, I don't have to go in the code and change the proper usage string
 proper_usage_string="${bold_text}Proper usage:${normal_text} '${0} -l cpp/python/java/swift -pf leetcode/hackerrank/geeksforgeeks -n number -t title'"
 
-# Check number of command line arguments 
-# if [ "$#" -lt 6 ]; then
-#     echo ${proper_usage_string}
-#     # Exit the program
-#     exit 0
-# fi
+function parseInputCommand(){
+    while getopts l:p:n:t: flag
+    do
+	case "${flag}" in
+	    l) language=${OPTARG};;
+	    p) platform=${OPTARG};;
+	    n) problemNumber=${OPTARG};;
+	    t) problemTitle=${OPTARG};;
+	esac
+    done
 
-while getopts l:p:n:t: flag
-do
-    case "${flag}" in
-	l) language=${OPTARG};;
-	p) platform=${OPTARG};;
-	n) problemNumber=${OPTARG};;
-	t) problemTitle=${OPTARG};;
-    esac
-done
+    echo "${bold_text}Language: ${normal_text}${language}"
+    echo "${bold_text}Platform: ${normal_text}${platform}"
+    echo "${bold_text}ProblemNumber: ${normal_text}${problemNumber}"
+    echo "${bold_text}ProblemTitle: ${normal_text}${problemTitle}"
+}
 
-echo "${bold_text}Language: ${normal_text}${language}"
-echo "${bold_text}Platform: ${normal_text}${platform}"
-echo "${bold_text}ProblemNumber: ${normal_text}${problemNumber}"
-echo "${bold_text}ProblemTitle: ${normal_text}${problemTitle}"
+function main(){
+    # Check number of command line arguments 
+    if [ "$#" -lt 6 ]; then
+	echo ${proper_usage_string}
+	# Exit the program
+	exit 0
+    fi
+}
 
 # Extra Extra:
 # 1. Create a Readme file in every solution folder
