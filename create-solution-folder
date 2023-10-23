@@ -5,11 +5,10 @@
 bold_text=$(tput bold)
 normal_text=$(tput sgr0)
 
-# Script Variables
-proper_usage_string="${bold_text}Proper usage:${normal_text} '${0} -l cpp/python/java/swift -pf leetcode/hackerrank/geeksforgeeks -n number -t title'"
-
 function help(){
-    echo ${proper_usage_string}
+    echo "${bold_text}Usage:${normal_text} ${0} -p <platformName> -t <titleOfProblem>"
+    echo "${bold_text}Options:${normal_text}"
+    echo -e "\t-n"
 }
 
 function parseInputCommand(){
