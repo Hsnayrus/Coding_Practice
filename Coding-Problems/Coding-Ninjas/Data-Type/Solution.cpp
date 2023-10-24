@@ -44,6 +44,13 @@ Constraints :
 
 Time limit: 1 second
  */
-int dataTypes(string type) {
+int dataTypes(std::string type) {
     // Write your code here
+    type[0] = std::tolower(type[0]);
+    if (type == "long" || type == "double") {
+        return 8;
+    } else if (type == "float" || type == "integer") {
+        return 4;
+    }
+    return 1;
 }
