@@ -38,9 +38,58 @@ Constraints:
 1 <= N <= 15
 0 <= arr[i] <= 104
  */
+
+template <typename T> void print(std::vector<T> currentVector) {
+    for (size_t i = 0; i < currentVector.size(); i++) {
+        std::cout << currentVector[i];
+        if (i != currentVector.size() - 1) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
+}
+
 class Solution {
   public:
+    std::vector<std::vector<int> >
+    generateAllSubSets(const std::vector<int> &nums) {
+        std::vector<std::vector<int> > result;
+        int n = nums.size();
+        for (int i = 0; i < (1 << n); i++) {
+            std::vector<int> currentSet;
+            for (int j = 0; j < n; j++) {
+                if ((1 << j) & i) {
+                    currentSet.push_back(nums[j]);
+                }
+            }
+            result.push_back(currentSet);
+        }
+        return result;
+    }
+
+    template <typename T> T sumVector(const std::vector<T> &nums) {
+        T result = 0;
+        for (size_t i = 0; i < nums.size(); i++) {
+            result += nums[i];
+        }
+        return result;
+    }
+
     std::vector<int> subsetSums(std::vector<int> arr, int N) {
-        // Write your code here
+        std::vector<std::vector<int> > allSubsets = generateAllSubSets(arr);
+        std::vector<int> result;
+        for (size_t i = 0; i < allSubsets.size(); i++) {
+            result.push_back(sumVector(allSubsets[i]));
+        }
+        return result;
     }
 };
+
+int main() {
+    int nums[] = {5, 1, 2};
+    std::vector<int> numsV(nums, nums + sizeof(nums) / sizeof(int));
+    Solution s1;
+    std::vector<int> result = s1.subsetSums(numsV, numsV.size());
+    print(result);
+    return 0;
+}
