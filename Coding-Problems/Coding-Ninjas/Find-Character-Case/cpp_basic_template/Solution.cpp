@@ -49,6 +49,20 @@ Constraints :
 The input can be any single character.
  */
 
+int getCharacterCase(char c) {
+    if (c > 'A' && c < 'Z') {
+        return 1;
+    } else if (c > 'a' && c < 'z') {
+        return 0;
+    } else {
+        return -1;
+    }
+}
+
 int main() {
     // Write your code here
+    char c;
+    std::cin >> c;
+    std::cout << getCharacterCase(c);
+    return 0;
 }
