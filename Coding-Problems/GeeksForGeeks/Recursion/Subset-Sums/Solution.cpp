@@ -51,13 +51,12 @@ template <typename T> void print(std::vector<T> currentVector) {
 
 class Solution {
   public:
-    std::vector<std::vector<int> >
-    generateAllSubsets(const std::vector<int> &nums) {
-        int n = nums.size();
-        int i = 0;
-        std::vector<std::vector<int> > allSubsets;
-        while (i < (1 << n)) {
+    void generateAllSubsetsHelper(int i, const std::vector<int> &nums,
+                                  std::vector<std::vector<int> > &allSubsets) {
+
+        if (i < (1 << nums.size())) {
             int j = 0;
+            int n = nums.size();
             std::vector<int> currentSet;
             while (j < n) {
                 if ((1 << j) & i) {
@@ -66,8 +65,15 @@ class Solution {
                 j++;
             }
             allSubsets.push_back(currentSet);
-            i++;
+            return generateAllSubsetsHelper(i + 1, nums, allSubsets);
         }
+        return;
+    }
+    std::vector<std::vector<int> >
+    generateAllSubsets(const std::vector<int> &nums) {
+        int i = 0;
+        std::vector<std::vector<int> > allSubsets;
+        generateAllSubsetsHelper(i, nums, allSubsets);
         return allSubsets;
     }
 
