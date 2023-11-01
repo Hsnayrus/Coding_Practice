@@ -51,20 +51,30 @@ template <typename T> void print(std::vector<T> currentVector) {
 
 class Solution {
   public:
-    std::vector<std::vector<int> >
-    generateAllSubSets(const std::vector<int> &nums) {
-        std::vector<std::vector<int> > result;
-        int n = nums.size();
-        for (int i = 0; i < (1 << n); i++) {
+    void generateAllSubsetsHelper(int i, const std::vector<int> &nums,
+                                  std::vector<std::vector<int> > &allSubsets) {
+
+        if (i < (1 << nums.size())) {
+            int j = 0;
+            int n = nums.size();
             std::vector<int> currentSet;
-            for (int j = 0; j < n; j++) {
+            while (j < n) {
                 if ((1 << j) & i) {
                     currentSet.push_back(nums[j]);
                 }
+                j++;
             }
-            result.push_back(currentSet);
+            allSubsets.push_back(currentSet);
+            return generateAllSubsetsHelper(i + 1, nums, allSubsets);
         }
-        return result;
+        return;
+    }
+    std::vector<std::vector<int> >
+    generateAllSubsets(const std::vector<int> &nums) {
+        int i = 0;
+        std::vector<std::vector<int> > allSubsets;
+        generateAllSubsetsHelper(i, nums, allSubsets);
+        return allSubsets;
     }
 
     template <typename T> T sumVector(const std::vector<T> &nums) {
@@ -76,7 +86,7 @@ class Solution {
     }
 
     std::vector<int> subsetSums(std::vector<int> arr, int N) {
-        std::vector<std::vector<int> > allSubsets = generateAllSubSets(arr);
+        std::vector<std::vector<int> > allSubsets = generateAllSubsets(arr);
         std::vector<int> result;
         for (size_t i = 0; i < allSubsets.size(); i++) {
             result.push_back(sumVector(allSubsets[i]));
