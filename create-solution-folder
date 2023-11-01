@@ -7,8 +7,10 @@ normal_text=$(tput sgr0)
 
 function help(){
     echo "${bold_text}Usage:${normal_text} ${0} -p <platformName> -t <titleOfProblem>"
-    echo "${bold_text}Options:${normal_text}"
-    echo -e "\t-n"
+    echo -e "\n${bold_text}Options:${normal_text}"
+    echo -e "\t-n\t The problem number\n"
+    echo -e "\t-p\t The platform name. Examples of this are:\n\t  \t GeeksForGeeks(gfg), Leetcode(lc), CodingNinjas(cn)\n"
+    echo -e "\t-t\t The problem title, for example: 'if-else-decision-making'\n"
 }
 
 function parseInputCommand(){
@@ -69,6 +71,10 @@ main
 # 5. Extras:
 #     a. Make code clean using software engineering principles
 #     b. Check for all conditions of input
+#     c. Make sure I am doing some sort of input parsing(converting/removing invalid characters from strings of problem title).
+#        Example: if-else(decision-making) to if-else-decision-making, 'Hello World' to hello-world
+#     d. Make sure I am taking strings as input for title and making using them as one string, 'Hello World' would be
+#        two different arguments. But "Hello World" should be an ideal single argumnet.
 
 # Script is supposed to:
 # 1. Create a solution folder, in the appropriate repository, based on the given command line arguments
