@@ -5,12 +5,14 @@
 bold_text=$(tput bold)
 normal_text=$(tput sgr0)
 
-function help(){
+function helper(){
     echo "${bold_text}Usage:${normal_text} ${0} -p <platformName> -t <titleOfProblem>"
     echo -e "\n${bold_text}Options:${normal_text}"
     echo -e "\t-n\t The problem number\n"
     echo -e "\t-p\t The platform name. Examples of this are:\n\t  \t GeeksForGeeks(gfg), Leetcode(lc), CodingNinjas(cn)\n"
     echo -e "\t-t\t The problem title, for example: 'if-else-decision-making'\n"
+
+    exit 0
 }
 
 function parseInputCommand(){
@@ -23,26 +25,21 @@ function parseInputCommand(){
 	    t) problemTitle=${OPTARG};;
 	esac
     done
-
-    echo "${bold_text}Language: ${normal_text}${language}"
-    echo "${bold_text}Platform: ${normal_text}${platform}"
-    echo "${bold_text}ProblemNumber: ${normal_text}${problemNumber}"
-    echo "${bold_text}ProblemTitle: ${normal_text}${problemTitle}"
 }
 
 function main(){
+    echo $# arguments present
     # Check number of command line arguments needed
-    if [ "$#" -lt 6 ]; then
-	help
-	# Exit the program
-	exit 0
+    if [ "$#" -lt 4 ]; then
+	helper
     fi
     
     # Now that we have done the basic checking, let's parse the input command
     parseInputCommand
 }
 
-main
+# Call main and pass all the arguments from the command line
+main $@
 
 
 
