@@ -5,6 +5,9 @@
 bold_text=$(tput bold)
 normal_text=$(tput sgr0)
 
+:'
+This function is used to print the help message that contains all the details about usage and other flags
+'
 function helper(){
     echo "${bold_text}Usage:${normal_text} ${0} -p <platformName> -t <titleOfProblem>"
     echo -e "\n${bold_text}Options:${normal_text}"
@@ -15,6 +18,9 @@ function helper(){
     exit 0
 }
 
+:'
+This function parses the input flags. It takes the parametric flags values and stores them into variables
+'
 function parseInputCommand(){
     while getopts l:p:n:t: flag
     do
@@ -27,6 +33,9 @@ function parseInputCommand(){
     done
 }
 
+:'
+The main function of the script
+'
 function main(){
     echo $# arguments present
     # Check number of command line arguments needed
