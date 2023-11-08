@@ -26,6 +26,8 @@ function checkInputCommand(){
     if [ -z ${problemTitle} ] || [ -z ${platform} ]; then
         helper
     fi
+
+    # Make sure that all variables are converted to lowercase before proceeding
 }
 
 
@@ -33,16 +35,27 @@ function checkInputCommand(){
 This function parses the input flags. It takes the parametric flags values and stores them into variables
 '
 function parseInputCommand(){
-    while getopts l:p:n:t: flag
+    while getopts ":l:p:n:t:" flag
     do
 	case "${flag}" in
-	    l) language=${OPTARG};;
-	    p) platform=${OPTARG};;
-	    n) problemNumber=${OPTARG};;
-	    t) problemTitle=${OPTARG};;
+	    l)
+                language=${OPTARG}
+                ;;
+	    p)
+                platform=${OPTARG}
+                ;;
+	    n)
+                problemNumber=${OPTARG}
+                ;;
+	    t)
+                problemTitle=${OPTARG}
+                ;;
+            *)
+                helper
+                ;;
 	esac
     done
-
+    
     checkInputCommand
 }
 
@@ -56,7 +69,7 @@ function main(){
     fi
     
     # Now that we have done the basic checking, let's parse the input command
-    parseInputCommand
+    parseInputCommand $@
 }
 
 # Call main and pass all the arguments from the command line
