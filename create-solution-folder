@@ -37,17 +37,17 @@ function checkInputCommand(){
     fi
 
     # Now that we know problemTitle and platform are not empty, we can convert any uppercase characters to lowercase.
-    toLowercase platform
-    toLowercase problemTitle
+    toLowercase $platform
+    toLowercase $problemTitle
     
     if [ -z ${language} ]; then
         # Provide a default value, which is C++
         language="cpp"
     else
-        toLowercase language
+        toLowercase $language
     fi
 
-    isPositiveInteger $problemNumber
+    # isPositiveInteger $problemNumber
     echo "#####################TESTING####################"
     echo "Platform: ${platform}"
     echo "Problem Title: ${problemTitle}"
