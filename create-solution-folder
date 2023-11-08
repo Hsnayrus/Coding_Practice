@@ -19,6 +19,15 @@ function helper(){
 }
 
 : '
+This function is used to convert all the input flag variable arguments uppercase characters to lowercase
+problemTitle, platform, problemNumber, language are the variables which will be converted
+'
+function toLowercase(){
+    local -n temp=${1}
+    temp=${temp,,}
+}
+
+: '
 This function checks whether proper flags were used in the input function.
 '
 function checkInputCommand(){
