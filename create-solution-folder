@@ -5,20 +5,31 @@
 bold_text=$(tput bold)
 normal_text=$(tput sgr0)
 
-:'
+: '
 This function is used to print the help message that contains all the details about usage and other flags
 '
 function helper(){
     echo "${bold_text}Usage:${normal_text} ${0} -p <platformName> -t <titleOfProblem>"
     echo -e "\n${bold_text}Options:${normal_text}"
     echo -e "\t-n\t The problem number\n"
-    echo -e "\t-p\t The platform name. Examples of this are:\n\t  \t GeeksForGeeks(gfg), Leetcode(lc), CodingNinjas(cn)\n"
+    echo -e "\t-p\t The platform name. Examples of this are:\n\t  \t GeeksForGeeks(gfg), Leetcode(lc), CodingNinjas(cn), HackerRank(hr)\n"
     echo -e "\t-t\t The problem title, for example: 'if-else-decision-making'\n"
 
     exit 0
 }
 
-:'
+: '
+This function checks whether proper flags were used in the input function.
+'
+function checkInputCommand(){
+    # Check if both these flags are given or not. 
+    if [ -z ${problemTitle} ] || [ -z ${platform} ]; then
+        helper
+    fi
+}
+
+
+: '
 This function parses the input flags. It takes the parametric flags values and stores them into variables
 '
 function parseInputCommand(){
@@ -31,13 +42,14 @@ function parseInputCommand(){
 	    t) problemTitle=${OPTARG};;
 	esac
     done
+
+    checkInputCommand
 }
 
-:'
+: '
 The main function of the script
 '
 function main(){
-    echo $# arguments present
     # Check number of command line arguments needed
     if [ "$#" -lt 4 ]; then
 	helper
