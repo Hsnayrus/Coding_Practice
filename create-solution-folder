@@ -36,7 +36,22 @@ function checkInputCommand(){
         helper
     fi
 
-    # Make sure that all variables are converted to lowercase before proceeding
+    # Now that we know problemTitle and platform are not empty, we can convert any uppercase characters to lowercase.
+    toLowercase platform
+    toLowercase problemTitle
+    
+    if [ -z ${language} ]; then
+        # Provide a default value, which is C++
+        $language="cpp"
+    else
+        toLowercase language
+    fi
+
+    echo "#####################TESTING####################"
+    echo "Platform: ${platform}"
+    echo "Problem Title: ${problemTitle}"
+    echo "Language: ${language}"
+    echo "################################################"
 }
 
 
