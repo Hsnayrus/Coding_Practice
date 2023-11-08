@@ -42,11 +42,12 @@ function checkInputCommand(){
     
     if [ -z ${language} ]; then
         # Provide a default value, which is C++
-        $language="cpp"
+        language="cpp"
     else
         toLowercase language
     fi
 
+    isPositiveInteger $problemNumber
     echo "#####################TESTING####################"
     echo "Platform: ${platform}"
     echo "Problem Title: ${problemTitle}"
