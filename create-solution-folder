@@ -19,6 +19,17 @@ function helper(){
 }
 
 : '
+This function is going to be used to throw errors. THe function prints the value
+passed parameter and calls the helper function
+'
+function throwError(){
+    local errorMessage=$1
+    echo "${bold_text}Error: ${normal_text} $errorMessage"
+    echo -e "\n"
+    helper
+}
+
+: '
 This function returns 1 if the received number is a positive integer, and 0 otherwise
 ' 
 function isPositiveInteger(){
@@ -52,8 +63,7 @@ function parsePlatformValue(){
             subParentFolder="HackerRank"
             ;;
         *)
-            echo "Error in platform value: only lc, hr, gfg, cn allowed"
-            helper
+            throwError "Invalid platform value provided. Accepted values are Leetcode, GeeksForGeeks, HackerRank, CodingNinjas, or their shortforms"
             ;;
     esac
 }
@@ -109,8 +119,6 @@ function checkInputCommand(){
         echo "Error: Invalid number provided"
         helper
     fi
-    
-    tester
 }
 
 : '
@@ -139,6 +147,8 @@ function parseInputCommand(){
     done
     
     checkInputCommand
+
+    parsePlatformValue
 }
 
 : '
