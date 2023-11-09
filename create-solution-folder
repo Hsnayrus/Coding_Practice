@@ -14,8 +14,21 @@ function helper(){
     echo -e "\t-n\t The problem number\n"
     echo -e "\t-p\t The platform name. Examples of this are:\n\t  \t GeeksForGeeks(gfg), Leetcode(lc), CodingNinjas(cn), HackerRank(hr)\n"
     echo -e "\t-t\t The problem title, for example: 'if-else-decision-making'\n"
+    echo -e "\t-l\t The language used to code. Current accepted inputs: cpp/c++/py/python\n"
+    echo -e "\t-h\t Invoke this function\n"
 
     exit 0
+}
+
+: '
+This function is going to be used to throw errors. THe function prints the value
+passed parameter and calls the helper function
+'
+function throwError(){
+    local errorMessage=$1
+    echo "${bold_text}Error: ${normal_text} $errorMessage"
+    echo -e "\n"
+    helper
 }
 
 : '
@@ -29,6 +42,35 @@ function isPositiveInteger(){
         return 0
     fi
 }
+
+: '
+This function parses the platform variable has only certain values, This will decide what folder the 
+solution folder will end up in
+This function assumes that the toLowercase function has already been applied to $platform
+'
+function parsePlatformValue(){
+    parentFolder="Coding-Problems/"
+    subParentFolder=""
+    case $platform in
+        lc|leetcode)
+            subParentFolder="Leetcode/"
+            ;;
+        gfg|geeksforgeeks)
+            subParentFolder="GeeksForGeeks/"
+            ;;
+        cn|codingninjas)
+            subParentFolder="CodingNinjas/"
+            ;;
+        hr|hackerrank)
+            subParentFolder="HackerRank/"
+            ;;
+        *)
+            throwError "Invalid platform value provided. Accepted values are Leetcode, GeeksForGeeks, HackerRank, CodingNinjas, or their shortforms"
+            ;;
+    esac
+    # echo "$parentFolder$subParentFolder"
+}
+
 
 : '
 This function is going to be used for testing
@@ -60,29 +102,37 @@ This function checks whether proper flags were used in the input function.
 '
 function checkInputCommand(){
     # Check if both these flags are given or not. 
-    if [ -z ${problemTitle} ] || [ -z ${platform} ]; then
+    if [ -z "${problemTitle}" ] || [ -z "${platform}" ]; then
+        throwError "the -t and the -p flags with proper values are important"
         helper
     fi
 
     # Now that we know problemTitle and platform are not empty, we can convert any uppercase characters to lowercase.
     toLowercase platform
     toLowercase problemTitle
-    
-    if [ -z ${language} ]; then
+
+    # Check if the language flag is empty
+    if [ -z "${language}" ]; then
         # Provide a default value, which is C++
         language="cpp"
     else
         toLowercase language
     fi
-    
-    tester
+
+    # Here we are checking if problemNumber was ever initialized. If so we need to act accordingly
+    if [ -n "$problemNumber" ]; then
+        isPositiveInteger $problemNumber
+        if [[ $? = 0 ]]; then
+            throwError "Invalid value provided for the -n flag"
+        fi
+    fi
 }
 
 : '
 This function parses the input flags. It takes the parametric flags values and stores them into variables
 '
 function parseInputCommand(){
-    while getopts ":l:p:n:t:" flag
+    while getopts ":l:p:n:t:h" flag
     do
 	case "${flag}" in
 	    l)
@@ -97,24 +147,25 @@ function parseInputCommand(){
 	    t)
                 problemTitle=${OPTARG}
                 ;;
+            h)
+                helper
+                ;;
             *)
+                throwError "Invalid flag provided"
                 helper
                 ;;
 	esac
     done
     
     checkInputCommand
+
+    parsePlatformValue
 }
 
 : '
 The main function of the script
 '
-function main(){
-    # Check number of command line arguments needed
-    if [ "$#" -lt 4 ]; then
-	helper
-    fi
-    
+function main(){    
     # Now that we have done the basic checking, let's parse the input command
     parseInputCommand $@
 }
