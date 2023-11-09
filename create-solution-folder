@@ -23,9 +23,10 @@ This function returns 1 if the received number is a positive integer, and 0 othe
 ' 
 function isPositiveInteger(){
     local input=$1
-    isNumber=0
-    if [[ $input =~ ^\d+$ ]]; then
-        isNumber=1
+    if [[ $input =~ ^[0-9]+$ ]]; then
+        return 1
+    else
+        return 0
     fi
 }
 
@@ -36,9 +37,7 @@ function tester(){
     echo "#######################TESTING#######################"
     echo "Platform      : ${platform}"
     echo "Title         : ${problemTitle}"
-    if [[ $isNumber = 1 ]]; then
-        echo "Problem Number: ${problemNumber}"
-    fi
+    echo "Problem Number: ${problemNumber}"
     echo "Language      : ${language}"
     echo "#####################################################"
 }
@@ -49,7 +48,7 @@ This function is used to convert all the input flag variable arguments uppercase
 problemTitle, platform, problemNumber, language are the variables which will be converted
 '
 function toLowercase(){
-    local -n temp=${1}
+    local -n temp=$1
     temp=${temp,,}
 }
 
