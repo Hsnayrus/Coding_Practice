@@ -30,6 +30,19 @@ function isPositiveInteger(){
 }
 
 : '
+This function is going to be used for testing
+' 
+function tester(){
+    echo "#######################TESTING#######################"
+    echo "Platform      : ${platform}"
+    echo "Title         : ${title}"
+    echo "Problem Number: ${problemNumber}"
+    echo "Language      : ${language}"
+    echo "#####################################################"
+}
+
+
+: '
 This function is used to convert all the input flag variable arguments uppercase characters to lowercase
 problemTitle, platform, problemNumber, language are the variables which will be converted
 '
@@ -57,6 +70,8 @@ function checkInputCommand(){
     else
         toLowercase language
     fi
+    
+    tester
 }
 
 : '
