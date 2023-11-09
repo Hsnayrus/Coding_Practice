@@ -103,6 +103,12 @@ function checkInputCommand(){
     else
         toLowercase language
     fi
+
+    isPositiveInteger $problemNumber
+    if [[ $? = 0 ]]; then
+        echo "Error: Invalid number provided"
+        helper
+    fi
     
     tester
 }
