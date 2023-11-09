@@ -35,8 +35,10 @@ This function is going to be used for testing
 function tester(){
     echo "#######################TESTING#######################"
     echo "Platform      : ${platform}"
-    echo "Title         : ${title}"
-    echo "Problem Number: ${problemNumber}"
+    echo "Title         : ${problemTitle}"
+    if [[ $isNumber = 1 ]]; then
+        echo "Problem Number: ${problemNumber}"
+    fi
     echo "Language      : ${language}"
     echo "#####################################################"
 }
