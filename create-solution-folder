@@ -52,22 +52,23 @@ function parsePlatformValue(){
     parentFolder="Coding-Problems/"
     subParentFolder=""
     case $platform in
-        lc)
-            subParentFolder="Leetcode"
+        lc|leetcode)
+            subParentFolder="Leetcode/"
             ;;
-        gfg)
-            subParentFolder="GeeksForGeeks"
+        gfg|geeksforgeeks)
+            subParentFolder="GeeksForGeeks/"
             ;;
-        cn)
-            subParentFolder="CodingNinjas"
+        cn|codingninjas)
+            subParentFolder="CodingNinjas/"
             ;;
-        hr)
-            subParentFolder="HackerRank"
+        hr|hackerrank)
+            subParentFolder="HackerRank/"
             ;;
         *)
             throwError "Invalid platform value provided. Accepted values are Leetcode, GeeksForGeeks, HackerRank, CodingNinjas, or their shortforms"
             ;;
     esac
+    # echo "$parentFolder$subParentFolder"
 }
 
 
