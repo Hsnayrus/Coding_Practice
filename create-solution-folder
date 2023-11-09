@@ -100,6 +100,7 @@ This function checks whether proper flags were used in the input function.
 function checkInputCommand(){
     # Check if both these flags are given or not. 
     if [ -z ${problemTitle} ] || [ -z ${platform} ]; then
+        throwError "the -t and the -p flags with proper values are important"
         helper
     fi
 
@@ -116,7 +117,7 @@ function checkInputCommand(){
 
     isPositiveInteger $problemNumber
     if [[ $? = 0 ]]; then
-        echo "Error: Invalid number provided"
+        throwError "Invalid value provided for the -n flag"
         helper
     fi
 }
@@ -141,6 +142,7 @@ function parseInputCommand(){
                 problemTitle=${OPTARG}
                 ;;
             *)
+                throwError "Invalid flag provided"
                 helper
                 ;;
 	esac
@@ -157,6 +159,7 @@ The main function of the script
 function main(){
     # Check number of command line arguments needed
     if [ "$#" -lt 4 ]; then
+        throwError "Insufficient arguments provided"
 	helper
     fi
     
