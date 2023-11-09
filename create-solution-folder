@@ -37,7 +37,10 @@ function tester(){
     echo "#######################TESTING#######################"
     echo "Platform      : ${platform}"
     echo "Title         : ${problemTitle}"
-    echo "Problem Number: ${problemNumber}"
+    isPositiveInteger $problemNumber
+    if [[ $? = 1 ]]; then
+        echo "Problem Number: ${problemNumber}"
+    fi
     echo "Language      : ${language}"
     echo "#####################################################"
 }
