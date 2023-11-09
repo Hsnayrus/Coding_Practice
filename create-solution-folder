@@ -71,6 +71,25 @@ function parsePlatformValue(){
     # echo "$parentFolder$subParentFolder"
 }
 
+: '
+This function parses the value of the language flag
+'
+function parseLanguageValue(){
+    case "$language" in
+        c++|cpp|cplusplus)
+            language=cpp
+            ;;
+        python|py)
+            language=py
+            ;;
+        *)
+            throwError "Invalid language option provided"
+            helper
+            ;;
+    esac
+    # echo "Final Language: $language"
+}
+
 
 : '
 This function is going to be used for testing
@@ -151,7 +170,7 @@ function parseInputCommand(){
                 helper
                 ;;
             *)
-                throwError "Invalid flag provided"
+                throwError "Invalid options provided"
                 helper
                 ;;
 	esac
@@ -159,7 +178,13 @@ function parseInputCommand(){
     
     checkInputCommand
 
+    # At this point all the major flags' values have been checked. We can now move
+    # on to parsing their values for individual flags
     parsePlatformValue
+
+    if [ -n "$language" ]; then
+        parseLanguageValue
+    fi
 }
 
 : '
