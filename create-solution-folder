@@ -5,42 +5,122 @@
 bold_text=$(tput bold)
 normal_text=$(tput sgr0)
 
-function help(){
+: '
+This function is used to print the help message that contains all the details about usage and other flags
+'
+function helper(){
     echo "${bold_text}Usage:${normal_text} ${0} -p <platformName> -t <titleOfProblem>"
-    echo "${bold_text}Options:${normal_text}"
-    echo -e "\t-n"
+    echo -e "\n${bold_text}Options:${normal_text}"
+    echo -e "\t-n\t The problem number\n"
+    echo -e "\t-p\t The platform name. Examples of this are:\n\t  \t GeeksForGeeks(gfg), Leetcode(lc), CodingNinjas(cn), HackerRank(hr)\n"
+    echo -e "\t-t\t The problem title, for example: 'if-else-decision-making'\n"
+
+    exit 0
 }
 
+: '
+This function returns 1 if the received number is a positive integer, and 0 otherwise
+' 
+function isPositiveInteger(){
+    local input=$1
+    if [[ $input =~ ^[0-9]+$ ]]; then
+        return 1
+    else
+        return 0
+    fi
+}
+
+: '
+This function is going to be used for testing
+' 
+function tester(){
+    echo "#######################TESTING#######################"
+    echo "Platform      : ${platform}"
+    echo "Title         : ${problemTitle}"
+    isPositiveInteger $problemNumber
+    if [[ $? = 1 ]]; then
+        echo "Problem Number: ${problemNumber}"
+    fi
+    echo "Language      : ${language}"
+    echo "#####################################################"
+}
+
+
+: '
+This function is used to convert all the input flag variable arguments uppercase characters to lowercase
+problemTitle, platform, problemNumber, language are the variables which will be converted
+'
+function toLowercase(){
+    local -n temp=$1
+    temp=${temp,,}
+}
+
+: '
+This function checks whether proper flags were used in the input function.
+'
+function checkInputCommand(){
+    # Check if both these flags are given or not. 
+    if [ -z ${problemTitle} ] || [ -z ${platform} ]; then
+        helper
+    fi
+
+    # Now that we know problemTitle and platform are not empty, we can convert any uppercase characters to lowercase.
+    toLowercase platform
+    toLowercase problemTitle
+    
+    if [ -z ${language} ]; then
+        # Provide a default value, which is C++
+        language="cpp"
+    else
+        toLowercase language
+    fi
+    
+    tester
+}
+
+: '
+This function parses the input flags. It takes the parametric flags values and stores them into variables
+'
 function parseInputCommand(){
-    while getopts l:p:n:t: flag
+    while getopts ":l:p:n:t:" flag
     do
 	case "${flag}" in
-	    l) language=${OPTARG};;
-	    p) platform=${OPTARG};;
-	    n) problemNumber=${OPTARG};;
-	    t) problemTitle=${OPTARG};;
+	    l)
+                language=${OPTARG}
+                ;;
+	    p)
+                platform=${OPTARG}
+                ;;
+	    n)
+                problemNumber=${OPTARG}
+                ;;
+	    t)
+                problemTitle=${OPTARG}
+                ;;
+            *)
+                helper
+                ;;
 	esac
     done
-
-    echo "${bold_text}Language: ${normal_text}${language}"
-    echo "${bold_text}Platform: ${normal_text}${platform}"
-    echo "${bold_text}ProblemNumber: ${normal_text}${problemNumber}"
-    echo "${bold_text}ProblemTitle: ${normal_text}${problemTitle}"
+    
+    checkInputCommand
 }
 
+: '
+The main function of the script
+'
 function main(){
     # Check number of command line arguments needed
-    if [ "$#" -lt 6 ]; then
-	help
-	# Exit the program
-	exit 0
+    if [ "$#" -lt 4 ]; then
+	helper
     fi
     
     # Now that we have done the basic checking, let's parse the input command
-    parseInputCommand
+    parseInputCommand $@
 }
 
-main
+# Call main and pass all the arguments from the command line
+main $@
 
 
 
@@ -69,6 +149,10 @@ main
 # 5. Extras:
 #     a. Make code clean using software engineering principles
 #     b. Check for all conditions of input
+#     c. Make sure I am doing some sort of input parsing(converting/removing invalid characters from strings of problem title).
+#        Example: if-else(decision-making) to if-else-decision-making, 'Hello World' to hello-world
+#     d. Make sure I am taking strings as input for title and making using them as one string, 'Hello World' would be
+#        two different arguments. But "Hello World" should be an ideal single argumnet.
 
 # Script is supposed to:
 # 1. Create a solution folder, in the appropriate repository, based on the given command line arguments
