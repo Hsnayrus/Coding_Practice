@@ -19,6 +19,17 @@ function helper(){
 }
 
 : '
+This function returns 1 if the received number is a positive integer, and 0 otherwise
+' 
+function isPositiveInteger(){
+    local input=$1
+    isNumber=0
+    if [[ $input =~ ^\d+$ ]]; then
+        isNumber=1
+    fi
+}
+
+: '
 This function is used to convert all the input flag variable arguments uppercase characters to lowercase
 problemTitle, platform, problemNumber, language are the variables which will be converted
 '
@@ -46,15 +57,7 @@ function checkInputCommand(){
     else
         toLowercase language
     fi
-
-    # isPositiveInteger $problemNumber
-    echo "#####################TESTING####################"
-    echo "Platform: ${platform}"
-    echo "Problem Title: ${problemTitle}"
-    echo "Language: ${language}"
-    echo "################################################"
 }
-
 
 : '
 This function parses the input flags. It takes the parametric flags values and stores them into variables
