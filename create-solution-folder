@@ -31,6 +31,35 @@ function isPositiveInteger(){
 }
 
 : '
+This function parses the platform variable has only certain values, This will decide what folder the 
+solution folder will end up in
+This function assumes that the toLowercase function has already been applied to $platform
+'
+function parsePlatformValue(){
+    parentFolder="Coding-Problems/"
+    subParentFolder=""
+    case $platform in
+        lc)
+            subParentFolder="Leetcode"
+            ;;
+        gfg)
+            subParentFolder="GeeksForGeeks"
+            ;;
+        cn)
+            subParentFolder="CodingNinjas"
+            ;;
+        hr)
+            subParentFolder="HackerRank"
+            ;;
+        *)
+            echo "Error in platform value: only lc, hr, gfg, cn allowed"
+            helper
+            ;;
+    esac
+}
+
+
+: '
 This function is going to be used for testing
 ' 
 function tester(){
