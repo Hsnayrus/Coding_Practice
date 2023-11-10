@@ -51,23 +51,29 @@ This function assumes that the toLowercase function has already been applied to 
 function parsePlatformValue(){
     parentFolder="Coding-Problems/"
     subParentFolder=""
+    platformSf=""
     case $platform in
         lc|leetcode)
-            subParentFolder="Leetcode/"
+            platform="Leetcode"
+            platformSf="lc"
             ;;
         gfg|geeksforgeeks)
-            subParentFolder="GeeksForGeeks/"
+            platform="GeeksForGeeks"
+            platformSf="gfg"
             ;;
         cn|codingninjas)
-            subParentFolder="CodingNinjas/"
+            platform="CodingNinjas"
+            platformSf="cn"
             ;;
         hr|hackerrank)
-            subParentFolder="HackerRank/"
+            platform="HackerRank"
+            platform="hr"
             ;;
         *)
             throwError "Invalid platform value provided. Accepted values are Leetcode, GeeksForGeeks, HackerRank, CodingNinjas, or their shortforms"
             ;;
     esac
+    subParentFolder="${platform}/"
     # echo "$parentFolder$subParentFolder"
 }
 
