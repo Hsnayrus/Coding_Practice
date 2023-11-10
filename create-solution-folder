@@ -232,6 +232,17 @@ function createCodingProblemFolder(){
     fi
 }
 
+: '
+This function creates a git branch for the current problem. The format of the
+branch name is:
+       platformSf-title_here
+If number is available:
+       platformSf-number_title_here
+'
+function createCodingProblemGitBranch(){
+    echo "placeholder"
+}
+
 
 
 : '
@@ -252,6 +263,7 @@ The git branch is in the format: <platformShortform>-title_goes_here
 '
 function mainWorker(){
     createCodingProblemFolder
+    createCodingProblemGitBranch
 }
 
 : '
