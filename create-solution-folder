@@ -71,6 +71,22 @@ function parsePlatformValue(){
     # echo "$parentFolder$subParentFolder"
 }
 
+
+: '
+This function capitalizes the first letter of each word in the title.
+Assuming that the parameter, title has the format:
+this-is-the-title
+
+The output would be:
+This-Is-The-Title
+'
+function capitalizeFirstLetters(){
+    local -n title=$1
+    title=$(echo $title | sed "s/\b\([a-zA-Z]\)/\u\1/g")
+}
+
+
+
 : '
 This function parses the value of the language flag
 '
@@ -185,6 +201,8 @@ function parseInputCommand(){
     if [ -n "$language" ]; then
         parseLanguageValue
     fi
+
+    capitalizeFirstLetters problemTitle
 }
 
 : '
