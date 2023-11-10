@@ -67,7 +67,7 @@ function parsePlatformValue(){
             ;;
         hr|hackerrank)
             platform="HackerRank"
-            platform="hr"
+            platformSf="hr"
             ;;
         *)
             throwError "Invalid platform value provided. Accepted values are Leetcode, GeeksForGeeks, HackerRank, CodingNinjas, or their shortforms"
