@@ -256,9 +256,15 @@ function getGitBranchName(){
 
     branchName+="${platformSf}-"
 
+    if [ -n "$problemNumber" ]; then
+        branchName+="$problemNumber-"
+    fi
     
     titleWithUnderscores=$(convertUnderlinesToUnderscores problemTitle)
-    echo "$titleWithUnderscores"
+    branchName+="$titleWithUnderscores"
+
+    echo "Branch name is: $branchName"
+    
 }
 
 : '
