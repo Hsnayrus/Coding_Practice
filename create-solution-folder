@@ -227,7 +227,9 @@ function createCodingProblemFolder(){
     else
             echo "Creating folder for ${bold_text}${platform}${normal_text} platforms ${bold_text}${problemTitle}${normal_text} problem"
             sleep 2
-            echo "$finalFolder"
+            echo ""
+            echo "${bold_text}${finalFolder}${normal_text}"
+            echo ""
             mkdir "$finalFolder"
     fi
 }
