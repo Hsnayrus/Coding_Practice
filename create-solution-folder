@@ -223,7 +223,7 @@ function createCodingProblemFolder(){
     finalFolder+="$problemTitle"
 
     if [ -d "$finalFolder" ]; then
-        throwError "Directory already exists"
+        throwError "Directory already exists: $finalFolder"
     else
             echo "Creating folder for ${bold_text}${platform}${normal_text} platforms ${bold_text}${problemTitle}${normal_text} problem"
             sleep 2
