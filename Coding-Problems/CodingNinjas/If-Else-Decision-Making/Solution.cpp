@@ -56,4 +56,11 @@ Time limit: 1 second
 
  */
 
-std::string compareIfElse(int a, int b) {}
+std::string compareIfElse(int a, int b) {
+    if (a < b) {
+        return "smaller";
+    } else if (a > b) {
+        return "greater";
+    }
+    return "equal";
+}
