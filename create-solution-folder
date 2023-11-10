@@ -295,10 +295,25 @@ function createCodingProblemGitBranch(){
     if [[ $? = 1 ]]; then
         throwError "Branch with the name: $branchName already exists"
     else
+        echo "${bold_text}Switching to branch: ${normal_text} $branchName"
         git checkout -b "$branchName"
     fi
 }
 
+
+: '
+This function copies the languages files from the template folder to the newly created folder
+Assumes that folderName exists and so does language and so do their respective template folders
+'
+function copyTemplateFolderFilesToTargetFolder(){
+    template_folder="${parentFolder}"
+    template_folder+="templates/"
+    template_folder+="${language}_basic_template"
+    if [ -z "$finalFolder" ]; then
+        throwError "Folder to copy to does not exist"
+    fi
+    cp -v "${template_folder}/"* "$finalFolder"
+}
 
 
 : '
@@ -320,6 +335,7 @@ The git branch is in the format: <platformShortform>-title_goes_here
 function mainWorker(){
     createCodingProblemFolder
     createCodingProblemGitBranch
+    copyTemplateFolderFilesToTargetFolder
 }
 
 : '
