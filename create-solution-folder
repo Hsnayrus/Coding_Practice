@@ -216,6 +216,13 @@ function createCodingProblemFolder(){
 
     finalFolder="${parentFolder}${subParentFolder}"
 
+    # Check if the subParentFolder like Leetcode exists
+    # If it doesn't create it
+    if [ ! -d "$finalFolder" ]; then
+        mkdir "$finalFolder"
+    fi
+    
+
     if [ -n "$problemNumber" ]; then
         finalFolder+="$problemNumber-"
     fi
