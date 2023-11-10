@@ -106,6 +106,23 @@ function parseLanguageValue(){
     # echo "Final Language: $language"
 }
 
+: '
+This function is responsible for creating the actual folder name
+It assumes the following functions have been executed and the variables set
+by them
+checkInputCommand: for checking all the flags values existence
+parsePlatformValue: to parse the value of the platform and only accept relevant values
+parseLanguageValue if it exists: to parse the language folder we want to copy the template from
+capitalizeFirstLetters on the problemTitle: to make sure that the folder name is in proper format
+
+
+Once all the relevant variables have been set, we can finally create the folder
+and the branch required. 
+
+The folder is in the format Coding-Practice/<platform>/<problemTitle>
+The git branch is in the format: <platformShortform>-title_goes_here
+'
+
 
 : '
 This function is going to be used for testing
