@@ -238,6 +238,19 @@ function convertUnderlinesToUnderscores(){
     echo "$title"
 }
 
+: '
+This function checks whether the git branch passed as a parameter already exists
+'
+function checkIfBranchExists(){
+    local -n branch="$1"
+    branchExists=$(git branch | grep "$branch")
+    if [ -n "$branchExists" ]; then
+        # Branch exists
+        return 1
+    fi
+    return 0
+}
+
 
 : '
 This function is responsible for creating the name of the git branch to be made
@@ -249,7 +262,7 @@ If number is available:
        platformSf-number_title_here
 '
 function getGitBranchName(){
-    branchName=""
+    local branchName=""
     if [ -z "$platformSf" ] || [ -z "$problemTitle" ]; then
         throwError "Script Error. Please see proper usage: "
     fi
@@ -263,8 +276,7 @@ function getGitBranchName(){
     titleWithUnderscores=$(convertUnderlinesToUnderscores problemTitle)
     branchName+="$titleWithUnderscores"
 
-    echo "Branch name is: $branchName"
-    
+    echo "$branchName"
 }
 
 : '
@@ -275,7 +287,14 @@ function createCodingProblemGitBranch(){
     # Check if git branch already exists
     # If it does, then checkout that branch
     # Else, create a new branch
-    getGitBranchName problemTitle
+    branchName=$(getGitBranchName problemTitle)
+    checkIfBranchExists branchName
+
+    if [[ $? = 1 ]]; then
+        throwError "Branch with the name: $branchName already exists"
+    else
+        git checkout -b "$branchName"
+    fi
 }
 
 
