@@ -51,23 +51,29 @@ This function assumes that the toLowercase function has already been applied to 
 function parsePlatformValue(){
     parentFolder="Coding-Problems/"
     subParentFolder=""
+    platformSf=""
     case $platform in
         lc|leetcode)
-            subParentFolder="Leetcode/"
+            platform="Leetcode"
+            platformSf="lc"
             ;;
         gfg|geeksforgeeks)
-            subParentFolder="GeeksForGeeks/"
+            platform="GeeksForGeeks"
+            platformSf="gfg"
             ;;
         cn|codingninjas)
-            subParentFolder="CodingNinjas/"
+            platform="CodingNinjas"
+            platformSf="cn"
             ;;
         hr|hackerrank)
-            subParentFolder="HackerRank/"
+            platform="HackerRank"
+            platform="hr"
             ;;
         *)
             throwError "Invalid platform value provided. Accepted values are Leetcode, GeeksForGeeks, HackerRank, CodingNinjas, or their shortforms"
             ;;
     esac
+    subParentFolder="${platform}/"
     # echo "$parentFolder$subParentFolder"
 }
 
@@ -217,12 +223,77 @@ function createCodingProblemFolder(){
     finalFolder+="$problemTitle"
 
     if [ -d "$finalFolder" ]; then
-        throwError "Directory already exists"
+        throwError "Directory already exists: $finalFolder"
     else
             echo "Creating folder for ${bold_text}${platform}${normal_text} platforms ${bold_text}${problemTitle}${normal_text} problem"
             sleep 2
             echo "$finalFolder"
             mkdir "$finalFolder"
+    fi
+}
+
+function convertUnderlinesToUnderscores(){
+    local -n title="$1"
+    title=$(echo $title | sed "s/-/_/g; s/\([A-Z]\)/\l\1/g")
+    echo "$title"
+}
+
+: '
+This function checks whether the git branch passed as a parameter already exists
+'
+function checkIfBranchExists(){
+    local -n branch="$1"
+    branchExists=$(git branch | grep "$branch")
+    if [ -n "$branchExists" ]; then
+        # Branch exists
+        return 1
+    fi
+    return 0
+}
+
+
+: '
+This function is responsible for creating the name of the git branch to be made
+branch name 
+
+The format of the branch name is:
+       platformSf-title_here
+If number is available:
+       platformSf-number_title_here
+'
+function getGitBranchName(){
+    local branchName=""
+    if [ -z "$platformSf" ] || [ -z "$problemTitle" ]; then
+        throwError "Script Error. Please see proper usage: "
+    fi
+
+    branchName+="${platformSf}-"
+
+    if [ -n "$problemNumber" ]; then
+        branchName+="$problemNumber-"
+    fi
+    
+    titleWithUnderscores=$(convertUnderlinesToUnderscores problemTitle)
+    branchName+="$titleWithUnderscores"
+
+    echo "$branchName"
+}
+
+: '
+This function creates a git branch for the current problem.
+'
+function createCodingProblemGitBranch(){
+    # Get the name of the branch to be created
+    # Check if git branch already exists
+    # If it does, then checkout that branch
+    # Else, create a new branch
+    branchName=$(getGitBranchName problemTitle)
+    checkIfBranchExists branchName
+
+    if [[ $? = 1 ]]; then
+        throwError "Branch with the name: $branchName already exists"
+    else
+        git checkout -b "$branchName"
     fi
 }
 
@@ -246,6 +317,7 @@ The git branch is in the format: <platformShortform>-title_goes_here
 '
 function mainWorker(){
     createCodingProblemFolder
+    createCodingProblemGitBranch
 }
 
 : '
