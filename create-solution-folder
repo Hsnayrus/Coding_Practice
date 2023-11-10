@@ -232,15 +232,44 @@ function createCodingProblemFolder(){
     fi
 }
 
+function convertUnderlinesToUnderscores(){
+    local -n title="$1"
+    title=$(echo $title | sed "s/-/_/g; s/\([A-Z]\)/\l\1/g")
+    echo "$title"
+}
+
+
 : '
-This function creates a git branch for the current problem. The format of the
-branch name is:
+This function is responsible for creating the name of the git branch to be made
+branch name 
+
+The format of the branch name is:
        platformSf-title_here
 If number is available:
        platformSf-number_title_here
 '
+function getGitBranchName(){
+    branchName=""
+    if [ -z "$platformSf" ] || [ -z "$problemTitle" ]; then
+        throwError "Script Error. Please see proper usage: "
+    fi
+
+    branchName+="${platformSf}-"
+
+    
+    titleWithUnderscores=$(convertUnderlinesToUnderscores problemTitle)
+    echo "$titleWithUnderscores"
+}
+
+: '
+This function creates a git branch for the current problem.
+'
 function createCodingProblemGitBranch(){
-    echo "placeholder"
+    # Get the name of the branch to be created
+    # Check if git branch already exists
+    # If it does, then checkout that branch
+    # Else, create a new branch
+    getGitBranchName problemTitle
 }
 
 
