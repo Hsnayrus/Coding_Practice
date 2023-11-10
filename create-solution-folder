@@ -193,6 +193,40 @@ function parseInputCommand(){
     done
 }
 
+: ' 
+Create a folder for the coding problem. Folder naming format if number is not present:
+
+Coding-Problems/<platform>/<title-here>
+
+If number is given:
+
+Coding-Problems/<platform>/<number>-<title-here>
+'
+function createCodingProblemFolder(){
+    
+    if [ -z "$problemTitle" ] || [ -z "$parentFolder" ] || [ -z "subParentFolder" ]; then
+        throwError "Script error. Please see proper usage below: "
+    fi
+
+    finalFolder="${parentFolder}${subParentFolder}"
+
+    if [ -n "$problemNumber" ]; then
+        finalFolder+="$problemNumber-"
+    fi
+
+    finalFolder+="$problemTitle"
+
+    if [ -d "$finalFolder" ]; then
+        throwError "Directory already exists"
+    else
+            echo "Creating folder for ${bold_text}${platform}${normal_text} platforms ${bold_text}${problemTitle}${normal_text} problem"
+            sleep 2
+            echo "$finalFolder"
+            mkdir "$finalFolder"
+    fi
+}
+
+
 
 : '
 This function is responsible for creating the actual folder name
@@ -211,7 +245,7 @@ The folder is in the format Coding-Practice/<platform>/<problemTitle>
 The git branch is in the format: <platformShortform>-title_goes_here
 '
 function mainWorker(){
-    echo ""
+    createCodingProblemFolder
 }
 
 : '
