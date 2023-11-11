@@ -61,4 +61,22 @@ Time Limit: 1 sec
  */
 int countDigits(int n) {
     // Write your code here.
+    int result = 0;
+    int tempN = n;
+    while (n != 0) {
+        if (n % 10 != 0) {
+            if (tempN % (n % 10) == 0) {
+                result++;
+            }
+        }
+        n = n / 10;
+    }
+    return result;
+}
+
+int main() {
+    int input;
+    std::cin >> input;
+    std::cout << "Digits: " << countDigits(input) << std::endl;
+    return 0;
 }
