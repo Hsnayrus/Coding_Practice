@@ -55,6 +55,25 @@ Sample Output 2:
 
  */
 
+std::pair<int, int> getSums(int num) {
+    std::pair<int, int> result(0, 0);
+    while (num != 0) {
+        if ((num % 10) % 2 == 0) {
+            result.first += num % 10;
+        } else {
+            result.second += num % 10;
+        }
+        num = num / 10;
+    }
+    return result;
+}
+
 int main() {
     // Write your code here
+    int input;
+    std::cin >> input;
+    std::pair<int, int> result;
+    result = getSums(input);
+    std::cout << result.first << " " << result.second;
+    return 0;
 }
