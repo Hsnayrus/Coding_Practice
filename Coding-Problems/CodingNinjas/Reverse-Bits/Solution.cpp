@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <limits>
+#include <math.h>
 #include <stdlib.h>
 #include <vector>
 /*
@@ -52,6 +53,37 @@ complexity: The expected time complexity is O(log(n)). Constraints : 1 <= T <=
 Time Limit: 1 sec
 
  */
+std::vector<int> convertToReverseBinary(long n) {
+    std::vector<int> result(32, 0);
+    int i = 0;
+    while (n != 0) {
+        if (n % 2 == 1) {
+            result[i] = 1;
+        }
+        n = n / 2;
+        i++;
+    }
+    return result;
+}
+
+long convertBinaryToDecimal(std::vector<int> binary) {
+    long result = 0;
+    for (int i = 0; i < 32; i++) {
+        if (binary[i] == 1) {
+            result += pow(2, 31 - i);
+        }
+    }
+    return result;
+}
+
 long reverseBits(long n) {
     // Write your code here.
+    return convertBinaryToDecimal(convertToReverseBinary(n));
+}
+
+int main() {
+    long input;
+    std::cin >> input;
+    std::cout << reverseBits(input) << std::endl;
+    return 0;
 }
