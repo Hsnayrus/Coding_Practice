@@ -54,4 +54,20 @@ C++ (g++ 5.4)
 
  */
 
-int main() {}
+int getNthFibonacciNumber(int n) {
+    int result = 1;
+    std::pair<int, int> previousTwo(1, 1);
+    for (int i = 2; i < n; i++) {
+        result = previousTwo.first + previousTwo.second;
+        previousTwo.first = previousTwo.second;
+        previousTwo.second = result;
+    }
+    return result;
+}
+
+int main() {
+    int input;
+    std::cin >> input;
+    std::cout << getNthFibonacciNumber(input);
+    return 0;
+}
