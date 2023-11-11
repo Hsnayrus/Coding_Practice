@@ -322,6 +322,32 @@ function copyTemplateFolderFilesToTargetFolder(){
     cp -v "${template_folder}/"* "$finalFolder"
 }
 
+: ' 
+This function opens the newly created file. 
+'
+function openNewlyCreatedFolder(){
+    fileToBeOpened="${finalFolder}/Solution.${language}"
+    case "$language" in
+        cpp)
+            : 
+            ;;
+        py)
+            # For the python case, we also need to create a virtual environment, install requied packages and then open the file
+            echo "${bold_text}Creating Python Virtual environment folder: ${normal_text} $finalFolder/myvenv"
+            echo ""
+            python3 -m venv "$finalFolder/myvenv"
+            echo ""
+
+            echo "${bold_text}Next Steps:${normal_text}:"
+            echo "1. Activate python virual environment using : source $finalFolder/myvenv"
+            echo "2. Install packages using: pip3 install -r ${finalFolder}/requirements.txt"
+            echo ""
+    esac
+    # Open the folder
+    echo "${bold_text}Opening File:${normal_text} $fileToBeOpened"
+    code "$fileToBeOpened"
+}
+
 
 : '
 This function is responsible for creating the actual folder name
@@ -343,6 +369,7 @@ function mainWorker(){
     createCodingProblemFolder
     createCodingProblemGitBranch
     copyTemplateFolderFilesToTargetFolder
+    openNewlyCreatedFolder
 }
 
 : '
