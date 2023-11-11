@@ -72,9 +72,16 @@ Time limit: 1 second
  */
 int Maximum(int x, int y) {
     // Write your code here.
+    if (x > y) {
+        return x;
+    }
+    return y;
 }
 void Swap(int &x, int &y) {
     // Write your code here.
+    int temp = x;
+    x = y;
+    y = temp;
 }
 int main() {
     int test, a, b, r;
