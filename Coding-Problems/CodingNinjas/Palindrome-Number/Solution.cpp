@@ -38,4 +38,21 @@ Time Limit: 1 sec
  */
 bool palindrome(int n) {
     // Write your code here
+    int result = 0;
+    int tempN = n;
+    while (n != 0) {
+        result = result * 10 + n % 10;
+        n = n / 10;
+    }
+    if (result == tempN) {
+        return true;
+    }
+    return false;
+}
+
+int main() {
+    int input;
+    std::cin >> input;
+    std::cout << "Palindrome is: " << palindrome(input) << std::endl;
+    return 0;
 }
