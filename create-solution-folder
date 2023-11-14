@@ -345,7 +345,7 @@ function openNewlyCreatedFolder(){
     esac
     # Open the folder
     echo "${bold_text}Opening File:${normal_text} $fileToBeOpened"
-    code "$fileToBeOpened"
+    code "$finalFolder" && code "$fileToBeOpened"
 }
 
 
