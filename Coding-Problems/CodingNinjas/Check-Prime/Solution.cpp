@@ -71,4 +71,27 @@ Time limit: 1 second
  */
 bool isPrime(int n) {
     // Write your code here
+    /**
+     * Run a loop form 2 to sqrt(n), inclusive. call it i.
+     * If any number is divisible by i then return false
+     * Once loop ends, return true
+     */
+    if (n == 1) {
+        return false;
+    }
+    for (int i = 2; i <= sqrt(n); i++) {
+        if (n % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+int main() {
+    int arr[] = {1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12,
+                 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23};
+    std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
+    for (size_t i = 0; i < nums.size(); i++) {
+        std::cout << nums[i] << ": " << isPrime(nums[i]) << std::endl;
+    }
+    return 0;
 }
