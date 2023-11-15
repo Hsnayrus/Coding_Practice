@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <iostream>
 #include <limits>
+#include <math.h>
 #include <stdlib.h>
 #include <vector>
 /*
@@ -53,6 +54,36 @@ Constraints:
 Time Limit: 1 sec
 
  */
+int getDigits(int n) {
+    int digits = 0;
+    do {
+        digits++;
+        n = n / 10;
+    } while (n > 0);
+    return digits;
+}
 bool checkArmstrong(int n) {
     // Write your code here
+    // Get the number of digits
+    // For each number, raise it to the digits the number has
+    // Add it to a number named result.
+    // If result == n; return true else false
+    int digits = getDigits(n);
+    int result = 0;
+    int tempN = n;
+    while (n > 0) {
+        result += pow(int(n % 10), digits);
+        n = n / 10;
+    }
+    if (result == tempN) {
+        return true;
+    }
+    return false;
+}
+
+int main() {
+    int input;
+    std::cin >> input;
+    std::cout << checkArmstrong(input) << std::endl;
+    return 0;
 }
