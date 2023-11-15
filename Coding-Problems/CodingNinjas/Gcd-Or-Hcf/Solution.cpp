@@ -54,16 +54,6 @@ Time Limit: 1 sec
 
 int calcGCD(int n, int m) {
     // Write your code here.
-    int i = (n < m) ? n : m;
-    int gcd = (i < 1) ? i : 1;
-    while (i > 1) {
-        if ((n % i == 0) && (m % i == 0)) {
-            gcd = i;
-            break;
-        }
-        i--;
-    }
-    return gcd;
 }
 int main() {
     int n, m;
