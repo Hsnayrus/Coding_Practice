@@ -1,7 +1,8 @@
 #include <algorithm>
+#include <cmath>
+#include <cstdlib>
 #include <iostream>
 #include <limits>
-#include <stdlib.h>
 #include <vector>
 /*
 Problem Statement
@@ -60,41 +61,16 @@ Constraints:
 Time Limit: 1 sec
 
  */
-int sumOfDivisors(int n) {
-    /*
-    To find a divisor, we need to run a loop from 1 to n
-    See if its divisible by the current number
-    If it is add it to a variable called sum
-    Return sum
-    */
-    int sum = n;
-    for (int i = 1; i <= n / 2; i++) {
-        if (n % i == 0) {
-            sum += i;
-        }
-    }
-    return sum;
-}
 int sumOfAllDivisors(int n) {
     // Write your code here
-    /*
-    Run a loop from 1 to n, call it i
-    Get the sum of Divisors for that number, sumOfDivisors(i)
-    Add this to a result variable
-    Return result
-    */
-    int result = 0;
-    for (int i = 1; i <= n; i++) {
-        result += sumOfDivisors(i);
-    }
-    return result;
 }
 
 int main() {
     // int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16};
     // std::vector<int> numbers(arr, arr + (sizeof(arr) / sizeof(int)));
     // for (size_t i = 0; i < numbers.size(); i++) {
-    //     std::cout << sumOfDivisors(numbers[i]) << std::endl;
+    //     std::cout << numbers[i] << " : " << sumOfDivisors(numbers[i])
+    //               << std::endl;
     // }
     int input;
     std::cin >> input;
