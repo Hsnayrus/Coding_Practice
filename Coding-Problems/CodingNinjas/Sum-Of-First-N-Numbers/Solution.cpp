@@ -46,10 +46,7 @@ Space Complexity: The expected space complexity is O(1). Constraints: 1 <= n <=
  */
 long long sumFirstN(long long n) {
     // Write your code here.
-    if (n == 1) {
-        return 1;
-    }
-    return n + sumFirstN(n - 1);
+    return ((n * (n + 1)) / 2);
 }
 
 int main() {
