@@ -42,6 +42,35 @@ Constraints:
 -10^9 <= 'arr[i]' <=10^9
 
  */
+template <typename T> void printList(std::vector<T>& myVector) {
+    typename std::vector<T>::iterator myIterator = myVector.begin();
+    while (myIterator != myVector.end()) {
+        std::cout << *myIterator;
+        ++myIterator;
+        if (myIterator != myVector.end()) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
+}
+
 std::vector<int> reverseArray(int n, std::vector<int>& nums) {
     // Write your code here
+    int i = 0;
+    while (i < n / 2) {
+        int temp = nums[i];
+        nums[i] = nums[nums.size() - i - 1];
+        nums[nums.size() - i - 1] = temp;
+        ++i;
+    }
+    return nums;
+}
+int main() {
+    int arr[] = {1, 2, 4, 5, 6, 7, 8};
+    std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
+    printList(nums);
+    std::vector<int> result = reverseArray(8, nums);
+    printList(result);
+    printList(nums);
+    return 0;
 }
