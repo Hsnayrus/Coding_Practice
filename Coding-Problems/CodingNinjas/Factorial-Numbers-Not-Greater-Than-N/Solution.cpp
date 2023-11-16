@@ -65,17 +65,21 @@ template <typename T> void printList(std::vector<T> myVector) {
     }
     std::cout << std::endl;
 }
+
+void factorialNumbersWorker(long long i, long long n,
+                            std::vector<long long>& result) {
+    if (i > n) {
+        return;
+    }
+    result.push_back(i);
+    factorialNumbersWorker((i * (result.size() + 1)), n, result);
+}
+
 std::vector<long long> factorialNumbers(long long n) {
     // Write your code here
-    long long fact = 1;
     std::vector<long long> result;
-    for (long long i = 1; i <= n; i++) {
-        fact *= i;
-        if (fact > n) {
-            break;
-        }
-        result.push_back(fact);
-    }
+    int i = 1;
+    factorialNumbersWorker(i, n, result);
     return result;
 }
 int main() {
