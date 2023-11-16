@@ -46,4 +46,15 @@ Space Complexity: The expected space complexity is O(1). Constraints: 1 <= n <=
  */
 long long sumFirstN(long long n) {
     // Write your code here.
+    if (n == 1) {
+        return 1;
+    }
+    return n + sumFirstN(n - 1);
+}
+
+int main() {
+    long long input;
+    std::cin >> input;
+    std::cout << sumFirstN(input) << std::endl;
+    return 0;
 }
