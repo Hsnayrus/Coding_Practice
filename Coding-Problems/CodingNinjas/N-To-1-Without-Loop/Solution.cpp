@@ -52,8 +52,29 @@ Constraints:
 Time Limit: 1-sec
 
  */
+template <typename T> void printList(std::vector<T> myVector) {
+    typename std::vector<T>::iterator myIterator = myVector.begin();
+    while (myIterator != myVector.end()) {
+        std::cout << *myIterator;
+        ++myIterator;
+        if (myIterator != myVector.end()) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
+}
+void printNosWorker(int i, int n, std::vector<int>& result) {
+    if (i == 0) {
+        return;
+    }
+    result.push_back(i);
+    printNosWorker(i - 1, n, result);
+}
 std::vector<int> printNos(int x) {
     // Write your code here
+    std::vector<int> result;
+    printNosWorker(x, x, result);
+    return result;
 }
 
 int main() {
