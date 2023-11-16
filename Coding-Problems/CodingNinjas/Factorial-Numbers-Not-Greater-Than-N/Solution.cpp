@@ -54,6 +54,33 @@ which are less than or equal to ‘n’. Constraints: 1 <= n <= 10^18
 Time Limit: 1-sec
 
  */
+template <typename T> void printList(std::vector<T> myVector) {
+    typename std::vector<T>::iterator myIterator = myVector.begin();
+    while (myIterator != myVector.end()) {
+        std::cout << *myIterator;
+        ++myIterator;
+        if (myIterator != myVector.end()) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
+}
 std::vector<long long> factorialNumbers(long long n) {
     // Write your code here
+    long long fact = 1;
+    std::vector<long long> result;
+    for (long long i = 1; i <= n; i++) {
+        fact *= i;
+        if (fact > n) {
+            break;
+        }
+        result.push_back(fact);
+    }
+    return result;
+}
+int main() {
+    long long input;
+    std::cin >> input;
+    printList(factorialNumbers(input));
+    return 0;
 }
