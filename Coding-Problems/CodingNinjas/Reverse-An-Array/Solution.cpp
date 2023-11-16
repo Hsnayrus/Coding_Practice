@@ -56,21 +56,21 @@ template <typename T> void printList(std::vector<T>& myVector) {
 
 std::vector<int> reverseArray(int n, std::vector<int>& nums) {
     // Write your code here
-    int i = 0;
-    while (i < n / 2) {
-        int temp = nums[i];
-        nums[i] = nums[nums.size() - i - 1];
-        nums[nums.size() - i - 1] = temp;
-        ++i;
+    if (n == int(nums.size())) {
+        n = 0;
     }
-    return nums;
+    if (n == int(nums.size() / 2)) {
+        return nums;
+    }
+    std::swap(nums[n], nums[nums.size() - n - 1]);
+    return reverseArray(n + 1, nums);
 }
 int main() {
-    int arr[] = {1, 2, 4, 5, 6, 7, 8};
+    int arr[] = {1, 2, 3, 4};
     std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
-    printList(nums);
-    std::vector<int> result = reverseArray(8, nums);
-    printList(result);
-    printList(nums);
+    // printList(nums);
+    std::vector<int> result = reverseArray(int(nums.size()), nums);
+    // printList(result);
+    // printList(nums);
     return 0;
 }
