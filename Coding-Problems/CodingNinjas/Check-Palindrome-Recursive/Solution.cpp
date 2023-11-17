@@ -43,4 +43,18 @@ where |S| represents the length of string S.
  */
 bool isPalindrome(std::string& str) {
     // Write your code here
+    if (str.size() < 2) {
+        return true;
+    }
+    if (str[0] != str[str.size() - 1]) {
+        return false;
+    }
+    std::string newString(str.begin() + 1, str.begin() + str.size() - 1);
+    return isPalindrome(newString);
+}
+int main() {
+    std::string string;
+    std::cin >> string;
+    std::cout << "IsPalindrom: " << isPalindrome(string) << std::endl;
+    return 0;
 }
