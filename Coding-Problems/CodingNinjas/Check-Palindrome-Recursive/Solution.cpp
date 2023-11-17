@@ -41,16 +41,28 @@ Constraints:
 where |S| represents the length of string S.
 
  */
+// // Recursive solution
+// bool isPalindrome(std::string& str) {
+//     // Write your code here
+//     if (str.size() < 2) {
+//         return true;
+//     }
+//     if (str[0] != str[str.size() - 1]) {
+//         return false;
+//     }
+//     std::string newString(str.begin() + 1, str.begin() + str.size() - 1);
+//     return isPalindrome(newString);
+// }
+
+// Iterative solution
 bool isPalindrome(std::string& str) {
     // Write your code here
-    if (str.size() < 2) {
-        return true;
+    for (size_t i = 0; i < str.size() / 2; i++) {
+        if (str[i] != str[str.size() - i - 1]) {
+            return false;
+        }
     }
-    if (str[0] != str[str.size() - 1]) {
-        return false;
-    }
-    std::string newString(str.begin() + 1, str.begin() + str.size() - 1);
-    return isPalindrome(newString);
+    return true;
 }
 int main() {
     std::string string;
