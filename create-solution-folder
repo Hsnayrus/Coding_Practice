@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 
 # Output formatters
@@ -88,7 +88,7 @@ This-Is-The-Title
 '
 function capitalizeFirstLetters(){
     local -n title=$1
-    title=$(echo $title | sed "s/\b\([a-zA-Z]\)/\u\1/g")
+    title=$(echo $title | awk -F '-' '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) tolower(substr($i,2))}1' OFS="-")
 }
 
 
@@ -243,7 +243,7 @@ function createCodingProblemFolder(){
 
 function convertUnderlinesToUnderscores(){
     local -n title="$1"
-    title=$(echo $title | sed "s/-/_/g; s/\([A-Z]\)/\l\1/g")
+    title=$(echo $title | awk -F '-' '{for(i=1;i<=NF;i++) $i=tolower(substr($i,1))}1' OFS="_")
     echo "$title"
 }
 
