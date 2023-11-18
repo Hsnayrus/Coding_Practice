@@ -50,17 +50,29 @@ template <typename T> void printList(std::vector<T>& myVector) {
     std::cout << std::endl;
 }
 
+void generateFibonacciWorker(size_t n, std::vector<int>& sequence) {
+    if (sequence.size() == n) {
+        return;
+    }
+    if (sequence.size() == 0) {
+        sequence.push_back(0);
+        if (n == 1) {
+            return;
+        }
+        sequence.push_back(1);
+        if (n == 2) {
+            return;
+        }
+    }
+    sequence.push_back(sequence[sequence.size() - 1] +
+                       sequence[sequence.size() - 2]);
+    generateFibonacciWorker(n, sequence);
+}
+
 std::vector<int> generateFibonacciNumbers(int n) {
     // Write your code here
     std::vector<int> sequence;
-    sequence.push_back(0);
-    if (n == 1) {
-        return sequence;
-    }
-    sequence.push_back(1);
-    for (int i = 2; i < n; i++) {
-        sequence.push_back(sequence[i - 1] + sequence[i - 2]);
-    }
+    generateFibonacciWorker(n, sequence);
     return sequence;
 }
 int main() {
