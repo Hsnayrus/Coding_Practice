@@ -4,3 +4,4 @@ solution
 solution 
 *.cpp~ 
 *.hpp~
+*.vscode
