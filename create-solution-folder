@@ -319,7 +319,7 @@ function copyTemplateFolderFilesToTargetFolder(){
     if [ -z "$finalFolder" ]; then
         throwError "Folder to copy to does not exist"
     fi
-    cp -v "${template_folder}/"* "$finalFolder"
+    cp -v -r "${template_folder}/" "$finalFolder"
 }
 
 : ' 
