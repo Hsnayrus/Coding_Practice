@@ -65,6 +65,44 @@ Constraints:
 1  <= x <= 10^5
 1 <= arr[i] <= x
  */
+template <typename T> void printList(std::vector<T> & myVector) {
+    typename std::vector<T>::iterator myIterator = myVector.begin();
+    while (myIterator != myVector.end()) {
+        std::cout << *myIterator;
+        ++myIterator;
+        if (myIterator != myVector.end()) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
+}
+
 std::vector<int> countFrequency(int n, int x, std::vector<int> & nums) {
     // Write your code here.
+    std::vector<int> result(n, 0);
+    for (size_t i = 0; i < n; i++) {
+        if (nums[i] <= n) {
+            result[nums[i] - 1]++;
+        }
+    }
+    return result;
+}
+
+int findMaxElement(std::vector<int> & nums) {
+    int max = nums[0];
+    for (size_t i = 1; i <= nums.size(); i++) {
+        if (nums[i] > max) {
+            max = nums[i];
+        }
+    }
+    return max;
+}
+
+int main() {
+    int arr[] = {1, 3, 4, 3, 4, 1};
+    std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
+    std::vector<int> result =
+        countFrequency(int(nums.size()), findMaxElement(nums), nums);
+    printList(result);
+    return 0;
 }
