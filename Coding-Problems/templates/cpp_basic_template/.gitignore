@@ -1,0 +1,6 @@
+solution
+*~
+*.dSYM* 
+solution 
+*.cpp~ 
+*.hpp~
