@@ -44,62 +44,34 @@ Space Complexity : The expected time complexity is O(n), where n is the size of
 the array. Constraints : 2 <=  n <= 10^4 1 <= v[i] <= 10^9 There are at least
 two distinct elements in the array. Time Limit: 1 sec
  */
-
-int findMaxElement(std::vector<int>& myV) {
-    int max = INT_MIN;
-    for (size_t i = 0; i < myV.size(); i++) {
-        if (myV[i] > max) {
-            max = myV[i];
-        }
-    }
-    return max;
-}
-/**
- * Find the max element in the array
- * Create a vector, named frequencies with max elements of value 0
- * Iterate from the first element to the last element of the array
- * frequency[currentElement - 1] ++;
- * Create two variables, minF and maxF
- * Iterate through the frequency array
- * Initialize
- * minFI = 0
- * maxFI = 0
- * if(currentFrequency is < frequency[minFI]){
- * 	minFI = i;
- * }
- * if(currentFrequency is > frequency[maxFI]){
- * 	maxFI = currentFrequency
- * }
- * return a vector containing max and min
- */
 std::vector<int> getFrequencies(std::vector<int>& v) {
     // Write Your Code Here
-    int maxElement = findMaxElement(v);
-    std::vector<int> frequencies(maxElement, 0);
+    std::map<int, int> frequencyMap;
     for (size_t i = 0; i < v.size(); i++) {
-        frequencies[v[i] - 1]++;
+        frequencyMap[v[i]] += 1;
     }
-    int minFI = 0;
-    int maxFI = 0;
-    for (size_t i = 1; i < v.size(); i++) {
-        if (frequencies[minFI] == 0 && frequencies[i] != 0) {
-            minFI = i;
+    std::map<int, int>::iterator myIt = frequencyMap.begin();
+    int minE = myIt->first;
+    int maxE = myIt->first;
+    while (myIt != frequencyMap.end()) {
+        if (myIt->second < frequencyMap[minE]) {
+            minE = myIt->first;
         }
-        if (frequencies[i] != 0 && frequencies[i] < frequencies[minFI]) {
-            minFI = i;
+        if (myIt->second > frequencyMap[maxE]) {
+            maxE = myIt->first;
         }
-        if (frequencies[i] > frequencies[maxFI]) {
-            maxFI = i;
-        }
+        ++myIt;
     }
+
     std::vector<int> result;
-    result.push_back(maxFI + 1);
-    result.push_back(minFI + 1);
+    result.push_back(maxE);
+    result.push_back(minE);
     return result;
 }
 int main() {
-    int arr[] = {1, 2, 1, 1, 3, 4};
+    int arr[] = {7, 9, 9, 15, 5};
     std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
+    printList1D(nums);
     std::vector<int> result = getFrequencies(nums);
     printList1D(result);
     return 0;
