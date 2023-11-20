@@ -40,37 +40,43 @@ Constraints :
 Time Limit: 1 sec
  */
 
-bool isSorted(int nums[], int n) {
-    for (int i = 0; i < n - 1; i++) {
+std::pair<bool, size_t> isSorted(std::vector<int> &nums) {
+    std::pair<bool, size_t> result(true, nums.size());
+    for (size_t i = 0; i < nums.size() - 1; i++) {
         if (nums[i] > nums[i + 1]) {
-            return false;
+            result.first = false;
+            result.second = i;
+            break;
         }
     }
-    return true;
+    return result;
 }
-void bubbleSort(int arr[], int n) {
+void bubbleSort(std::vector<int> &arr, size_t n) {
     // write your code here
-    while (!isSorted(arr, n)) {
-        for (int i = 0; i < n - 1; i++) {
+    std::pair<bool, size_t> sorted = isSorted(arr);
+    while (!sorted.first) {
+        for (size_t i = sorted.second; i < n - 1; i++) {
             if (arr[i] > arr[i + 1]) {
                 std::swap(arr[i], arr[i + 1]);
             }
         }
+        sorted = isSorted(arr);
     }
 }
 
 int main() {
     int arr[] = {2, 13, 1, 4, 3, 6, 28};
-    int n = 7;
-    bubbleSort(arr, n);
-    int i = 0;
-    while (i < n) {
-        std::cout << arr[i];
-        ++i;
-        if (i < n) {
-            std::cout << ", ";
-        }
-    }
+    std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
+    bubbleSort(nums, nums.size());
+    printList1D(nums);
+    // int i = 0;
+    // while (i < n) {
+    //     std::cout << arr[i];
+    //     ++i;
+    //     if (i < n) {
+    //         std::cout << ", ";
+    //     }
+    // }
     std::cout << std::endl;
     return 0;
 }
