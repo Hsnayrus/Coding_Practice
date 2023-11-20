@@ -39,6 +39,38 @@ Constraints :
 0 <= arr[i] <= 10^9
 Time Limit: 1 sec
  */
+
+bool isSorted(int nums[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        if (nums[i] > nums[i + 1]) {
+            return false;
+        }
+    }
+    return true;
+}
 void bubbleSort(int arr[], int n) {
     // write your code here
+    while (!isSorted(arr, n)) {
+        for (int i = 0; i < n - 1; i++) {
+            if (arr[i] > arr[i + 1]) {
+                std::swap(arr[i], arr[i + 1]);
+            }
+        }
+    }
+}
+
+int main() {
+    int arr[] = {2, 13, 1, 4, 3, 6, 28};
+    int n = 7;
+    bubbleSort(arr, n);
+    int i = 0;
+    while (i < n) {
+        std::cout << arr[i];
+        ++i;
+        if (i < n) {
+            std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
+    return 0;
 }
