@@ -39,32 +39,22 @@ Constraints :
 0 <= arr[i] <= 10^9
 Time Limit: 1 sec
  */
-
-std::pair<bool, size_t> isSorted(std::vector<int> &nums) {
-    std::pair<bool, size_t> result(true, nums.size());
-    for (size_t i = 0; i < nums.size() - 1; i++) {
-        if (nums[i] > nums[i + 1]) {
-            result.first = false;
-            result.second = i;
-            break;
-        }
-    }
-    return result;
-}
 void bubbleSort(std::vector<int> &arr, size_t n) {
     // write your code here
-    std::pair<bool, size_t> sorted = isSorted(arr);
-    if (sorted.first) {
-        return;
-    }
-    for (size_t i = sorted.second; i < n - 1; i++) {
+    bool reiterate = false;
+    size_t i = 0;
+    while (i < (n - 1)) {
         if (arr[i] > arr[i + 1]) {
             std::swap(arr[i], arr[i + 1]);
+            reiterate = true;
+        }
+        ++i;
+        if (i == n - 1 && reiterate) {
+            i = 0;
+            reiterate = false;
         }
     }
-    bubbleSort(arr, arr.size());
 }
-
 int main() {
     int arr[] = {2, 13, 1, 4, 3, 6, 28};
     std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
