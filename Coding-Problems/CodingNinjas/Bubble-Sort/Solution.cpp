@@ -54,14 +54,15 @@ std::pair<bool, size_t> isSorted(std::vector<int> &nums) {
 void bubbleSort(std::vector<int> &arr, size_t n) {
     // write your code here
     std::pair<bool, size_t> sorted = isSorted(arr);
-    while (!sorted.first) {
-        for (size_t i = sorted.second; i < n - 1; i++) {
-            if (arr[i] > arr[i + 1]) {
-                std::swap(arr[i], arr[i + 1]);
-            }
-        }
-        sorted = isSorted(arr);
+    if (sorted.first) {
+        return;
     }
+    for (size_t i = sorted.second; i < n - 1; i++) {
+        if (arr[i] > arr[i + 1]) {
+            std::swap(arr[i], arr[i + 1]);
+        }
+    }
+    bubbleSort(arr, arr.size());
 }
 
 int main() {
