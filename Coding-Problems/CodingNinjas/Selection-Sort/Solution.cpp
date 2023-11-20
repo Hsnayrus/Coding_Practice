@@ -49,6 +49,36 @@ Constraints :
 0 <= arr[i] <= 10^5
 Time Limit: 1 sec
  */
-void selectionSort(std::vector<int> & arr) {
+/**
+ * Find the element that is wrong in array, that is the point where an element
+ * is less than the current element. If no such point exists then this position
+ * is 1.
+ * Swap it with the smallest element in the array after this element
+ * Repeat for all the other elements
+ *
+ */
+std::pair<size_t, size_t> findSmallest(std::vector<int>& vec,
+                                       size_t currentIndex) {
+    size_t smallestIndex = currentIndex;
+    for (size_t i = currentIndex + 1; i < vec.size(); i++) {
+        if (vec[i] < vec[smallestIndex]) {
+            smallestIndex = i;
+        }
+    }
+    return std::make_pair(currentIndex, smallestIndex);
+}
+
+void selectionSort(std::vector<int>& arr) {
     // Write your code here.
+    for (size_t i = 0; i < arr.size() - 1; i++) {
+        std::pair<size_t, size_t> swapper = findSmallest(arr, i);
+        std::swap(arr[swapper.first], arr[swapper.second]);
+    }
+}
+int main() {
+    int arr[] = {1, 5, 4, 2, 6, 5, 5, 1, 1};
+    std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
+    selectionSort(nums);
+    printList1D(nums);
+    return 0;
 }
