@@ -36,6 +36,26 @@ Constraints :>
 0 <= arr[i] <= 10^5
 Time Limit: 1 sec
  */
+void findRightPlace(int arr[], int n, int startIndex) {
+    for (int j = startIndex; j > 0; j--) {
+        if (arr[j - 1] > arr[j]) {
+            std::swap(arr[j - 1], arr[j]);
+        }
+    }
+}
 void insertionSort(int arr[], int n) {
     // write your code here
+    for (int i = 1; i < n; i++) {
+        if (arr[i] < arr[i - 1]) {
+            findRightPlace(arr, n, i);
+        }
+    }
+}
+int main() {
+    int arr[] = {2, 13, 3, 4, 1, 5, 6, 3};
+    int n = 8;
+    insertionSort(arr, n);
+    std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
+    printList1D(nums);
+    return 0;
 }
