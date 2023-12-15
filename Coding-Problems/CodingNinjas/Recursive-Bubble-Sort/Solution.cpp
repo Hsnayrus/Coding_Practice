@@ -44,17 +44,20 @@ Time Limit: 1 sec
  * previous element Else just move through the array
  */
 void bubbleSort(std::vector<int> & nums, int n) {
-    size_t i = 1;
-    while (i < nums.size()) {
-        if (nums[i] < nums[i - 1]) {
-            size_t j = i;
-            while (j > 0 && nums[j] < nums[j - 1]) {
-                std::swap(nums[j], nums[j - 1]);
-                j--;
-            }
-        }
-        i++;
+    if (n == nums.size()) {
+        n = 1;
     }
+    if (nums[n] < nums[n - 1]) {
+        size_t j = n;
+        while (j > 0 && nums[j] < nums[j - 1]) {
+            std::swap(nums[j], nums[j - 1]);
+            j--;
+        }
+    }
+    if (n == nums.size() - 1 || n > nums.size()) {
+        return;
+    }
+    bubbleSort(nums, n + 1);
 }
 int main() {
     int arr[] = {4, 31, 22, 23, 2, 32, 1, 3, 4, 55, 99};
