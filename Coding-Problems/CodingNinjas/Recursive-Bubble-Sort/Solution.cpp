@@ -43,22 +43,7 @@ Time Limit: 1 sec
  * 	   For every element greater than swap the current element with the
  * previous element Else just move through the array
  */
-void bubbleSort(std::vector<int> & nums, int n) {
-    if (n == nums.size()) {
-        n = 1;
-    }
-    if (nums[n] < nums[n - 1]) {
-        size_t j = n;
-        while (j > 0 && nums[j] < nums[j - 1]) {
-            std::swap(nums[j], nums[j - 1]);
-            j--;
-        }
-    }
-    if (n == nums.size() - 1 || n > nums.size()) {
-        return;
-    }
-    bubbleSort(nums, n + 1);
-}
+void bubbleSort(std::vector<int> & nums, int n) {}
 int main() {
     int arr[] = {4, 31, 22, 23, 2, 32, 1, 3, 4, 55, 99};
     std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
