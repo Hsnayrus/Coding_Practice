@@ -36,14 +36,9 @@ Constraints :
 0 <= arr[i] <= 10^9
 Time Limit: 1 sec
 */
-/**
- * Iterate through the array until the second last element(< n - 1)
- * If the current element is greater than the next element
- *     Iterate the array from the current element to the first one.
- * 	   For every element greater than swap the current element with the
- * previous element Else just move through the array
- */
-void bubbleSort(std::vector<int> & nums, int n) {}
+void bubbleSort(std::vector<int> & nums, int n) {
+    // Write your code here
+}
 int main() {
     int arr[] = {4, 31, 22, 23, 2, 32, 1, 3, 4, 55, 99};
     std::vector<int> nums(arr, arr + (sizeof(arr) / sizeof(int)));
