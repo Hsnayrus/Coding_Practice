@@ -86,3 +86,8 @@ class Solution {
         */
     }
 };
+
+int main() {
+    // Reattempt
+    return EXIT_SUCCESS;
+}
