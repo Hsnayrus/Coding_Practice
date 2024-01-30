@@ -51,6 +51,43 @@ struct TreeNode {
 
 class Solution {
   public:
+    /**
+     * Iterative approach:
+     * Check if either original, cloned or target are null,
+     * 	Return nullptr
+     * Create an empty stack called nodeStack
+     * Push cloned to it
+     * Run a while loop until the stack is empty
+     * Create a variable called currentNode
+     * currentNode = nodeStack.pop()
+     * if(currentNode != nullptr){
+     * 	if(currentNode->val == target->val){
+     * 		return currentNode;
+     * 	}
+     * 	nodeStack.push(currentNode->left);
+     * 	nodeStack.push(currentNode->right);
+     * }
+     */
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned,
-                            TreeNode* target) {}
+                            TreeNode* target) {
+
+        if (original == nullptr || cloned == nullptr || target == nullptr) {
+            return original;
+        }
+        std::stack<TreeNode*> nodeStack;
+        nodeStack.push(cloned);
+        TreeNode* current;
+        while (!nodeStack.empty()) {
+            current = nodeStack.top();
+            nodeStack.pop();
+            if (current != nullptr) {
+                if (current->val == target->val) {
+                    break;
+                }
+                nodeStack.push(current->left);
+                nodeStack.push(current->right);
+            }
+        }
+        return current;
+    }
 };
