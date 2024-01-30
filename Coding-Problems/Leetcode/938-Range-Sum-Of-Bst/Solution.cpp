@@ -38,28 +38,9 @@ struct TreeNode {
 };
 
 class Solution {
-    int sum = 0;
 
   public:
-    /**
-     * Algo Mk1:
-     * Start at the root node
-     * If current node is null, return 0
-     * If root->val >= low and <= high
-     * 	Sum += root->val
-     * rangeSumBST on root->left
-     * rangeSumBST on root->right
-     */
-    int rangeSumBST(TreeNode* root, int low, int high) {
-        if (root != nullptr) {
-            if (root->val >= low && root->val <= high) {
-                sum += root->val;
-            }
-            rangeSumBST(root->left, low, high);
-            rangeSumBST(root->right, low, high);
-        }
-        return sum;
-    }
+    int rangeSumBST(TreeNode* root, int low, int high) {}
 };
 int main() {
     Solution s1;
