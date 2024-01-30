@@ -51,35 +51,6 @@ struct TreeNode {
 
 class Solution {
   public:
-    /**
-     * Recursive Algo Mk1:
-     * If target == nullptr || original == nullptr || cloned == nullptr
-     * 	Return nullptr
-     * if cloned.val == target.val, is the base condition
-     * 	Return cloned
-     * Declare a variable, assign it the value of nullptr, call it cloneTarget
-     * cloneTarget = Recurse on the left node of cloned
-     * // Recurse again if target not found on the left side.
-     * if(cloneTarget == nullptr){
-     * 	cloneTarget = Recurse on the right node of cloned
-     * }
-     * return cloneTarget
-     */
     TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned,
-                            TreeNode* target) {
-
-        if (original == nullptr || cloned == nullptr || target == nullptr) {
-            return nullptr;
-        }
-        // Base Condition
-        if (cloned->val == target->val) {
-            return cloned;
-        }
-        TreeNode* clonedTarget = nullptr;
-        clonedTarget = getTargetCopy(original, cloned->left, target);
-        if (clonedTarget == nullptr) {
-            clonedTarget = getTargetCopy(original, cloned->right, target);
-        }
-        return clonedTarget;
-    }
+                            TreeNode* target) {}
 };
