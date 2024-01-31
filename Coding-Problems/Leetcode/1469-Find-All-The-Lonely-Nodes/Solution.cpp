@@ -50,5 +50,62 @@ struct TreeNode {
 
 class Solution {
   public:
-    std::vector<int> getLonelyNodes(TreeNode* root) {}
+    /**
+     * Iterative Solution Algo Mk1:
+     * If root is empty
+     * 	Return empty list
+     * Create an integer vector named lonelyNodes
+     * Create a stack named nodeStack
+     * Push root to it
+     * TreeNode * current;
+     * Run a while loop until the stack is empty
+     * current = nodeStack.top();
+     * nodeStack.pop();
+     * if(current != nullptr){
+     * 	bool left;
+     * bool right;
+     * if((left = root->left == nullptr)^ (right = root->right == nullptr)){
+     * 	if left{
+     * 	append right to lonelyNOdes
+     * }
+     * else
+     * 	append left ot lonelyNodes
+     * }
+     * if(~left){
+     * stack.push(left)}
+     * if(~right){
+     * stack.push(right)}
+     * }
+     */
+    std::vector<int> getLonelyNodes(TreeNode* root) {
+        std::vector<int> lonelyNodes;
+        if (root != nullptr) {
+            std::stack<TreeNode*> nodeStack;
+            nodeStack.push(root);
+            TreeNode* current;
+            bool left;
+            bool right;
+            while (!nodeStack.empty()) {
+                current = nodeStack.top();
+                nodeStack.pop();
+                if (current != nullptr) {
+                    if ((left = current->left == nullptr) ^
+                        (right = current->right == nullptr)) {
+                        if (left) {
+                            lonelyNodes.push_back(current->right->val);
+                        } else {
+                            lonelyNodes.push_back(current->left->val);
+                        }
+                    }
+                    if (!left) {
+                        nodeStack.push(current->left);
+                    }
+                    if (!right) {
+                        nodeStack.push(current->right);
+                    }
+                }
+            }
+        }
+        return lonelyNodes;
+    }
 };
