@@ -79,8 +79,12 @@ class Solution {
                 lonelyNodes.push_back(root->left->val);
             }
         }
-        getLonelyNodes(root->left);
-        getLonelyNodes(root->right);
+        if (!left) {
+            getLonelyNodes(root->left);
+        }
+        if (!right) {
+            getLonelyNodes(root->right);
+        }
         return lonelyNodes;
     }
 };
