@@ -49,42 +49,6 @@ struct TreeNode {
 };
 
 class Solution {
-    std::vector<int> lonelyNodes;
-
   public:
-    /**
-     * Recursive algo Mk1:
-     * if(root == null), return null
-     * bool left = left == nullptr
-     * bool right = right == nullptr;
-     * if(left & ~right || ~left & right)
-     * 	if(left)
-     * 		Push right to lonely
-     * 	else
-     * 		Push left to lonely
-     * Recurse on the left node
-     * Recurse on the right node
-     * Return lonelyNodes;
-     */
-    std::vector<int> getLonelyNodes(TreeNode* root) {
-        if (root == nullptr) {
-            return lonelyNodes;
-        }
-        bool left;
-        bool right;
-        if ((left = root->left == nullptr) ^ (right = root->right == nullptr)) {
-            if (left) {
-                lonelyNodes.push_back(root->right->val);
-            } else {
-                lonelyNodes.push_back(root->left->val);
-            }
-        }
-        if (!left) {
-            getLonelyNodes(root->left);
-        }
-        if (!right) {
-            getLonelyNodes(root->right);
-        }
-        return lonelyNodes;
-    }
+    std::vector<int> getLonelyNodes(TreeNode* root) {}
 };
