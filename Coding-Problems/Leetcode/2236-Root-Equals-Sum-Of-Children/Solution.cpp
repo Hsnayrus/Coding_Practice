@@ -40,5 +40,11 @@ struct TreeNode {
 };
 class Solution {
   public:
-    bool checkTree(TreeNode *root) {}
+    bool checkTree(TreeNode *root) {
+        if (root != nullptr && root->left != nullptr &&
+            root->right != nullptr) {
+            return (root->val == (root->left->val + root->right->val));
+        }
+        return false;
+    }
 };
