@@ -39,6 +39,7 @@ struct TreeNode {
 
 class Solution {
   public:
+    // Pretty good solution.
     TreeNode *searchBST(TreeNode *root, int val) {
         if (root == nullptr) {
             return nullptr;
