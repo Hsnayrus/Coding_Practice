@@ -43,6 +43,48 @@ struct TreeNode {
 };
 
 class Solution {
+    TreeNode *mergeTreeWorker(TreeNode *root1, TreeNode *root2,
+                              TreeNode *result) {
+        TreeNode *firstTree = root1;
+        TreeNode *secondTree = root2;
+        bool first = firstTree != nullptr;
+        bool second = secondTree != nullptr;
+        if (first || second) {
+            result = new TreeNode();
+            if (first) {
+                result->val += firstTree->val;
+                firstTree = firstTree->left;
+            }
+            if (second) {
+                result->val += secondTree->val;
+                secondTree = secondTree->left;
+            }
+        }
+        result->left = mergeTreeWorker(firstTree, secondTree, result->left);
+        result->right =
+            mergeTreeWorker(root1->right, root2->right, result->right);
+        return result;
+    }
+
   public:
-    TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2) {}
+    /**
+     * Algorithm Mk1:
+     * Create a new TreeNode * named result(as a class member);
+     * Create two  TreeNode *s named firstTree and secondTree, assign them to
+     * root1 and root2
+     * if(firstTree != nullptr){
+     * 	result->val += firstTree->val;
+     * 	firstTree = firstTree->left;
+     * }
+     * if(secondTree != nullptr){
+     * 	result->val += secondTree->val;
+     * 	secondTree = secondTree->left;
+     * }
+     * result->left = mergeTrees(firstTree, secondTree);
+     * result->right = mergeTrees(firstTree, secondTree);
+     * return result;
+     */
+    TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2) {
+        return mergeTreeWorker(root1, root2, nullptr);
+    }
 };

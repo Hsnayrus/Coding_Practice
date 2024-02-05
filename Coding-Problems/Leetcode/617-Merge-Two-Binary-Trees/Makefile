@@ -1,4 +1,4 @@
-CPPFLAGS= -Wall -Werror -pedantic -std=gnu++98 -ggdb3
+CPPFLAGS= -Wall -Werror -pedantic -std=gnu++11 -ggdb3
 solution: Solution.cpp myHeader.hpp
 	g++ $(CPPFLAGS) -o solution Solution.cpp
 
