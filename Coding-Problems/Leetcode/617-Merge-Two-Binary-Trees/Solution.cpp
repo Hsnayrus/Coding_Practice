@@ -42,49 +42,81 @@ struct TreeNode {
         : val(x), left(left), right(right) {}
 };
 
+/**
+ * Algorithm Mk1:
+ * Create a new TreeNode * named result(as a class member);
+ * Create two  TreeNode *s named firstTree and secondTree, assign them to
+ * root1 and root2
+ * if(firstTree != nullptr){
+ * 	result->val += firstTree->val;
+ * 	firstTree = firstTree->left;
+ * }
+ * if(secondTree != nullptr){
+ * 	result->val += secondTree->val;
+ * 	secondTree = secondTree->left;
+ * }
+ * result->left = mergeTrees(firstTree, secondTree);
+ * result->right = mergeTrees(firstTree, secondTree);
+ * return result;
+ * ****Doesn't work****
+ *
+ * What I did to get the resultant graph:
+ * root1 = 1, 3, 2; root2 = 2, 1, 3;
+ * I first saw if the first is not null
+ * I created a new node since that is the case
+ * Checked if the first is not null
+ * Since the resultant node is already created I added the value this
+ * secondTree's node to the resultant's value
+ * Since I know that root1 is not null, I can traverse it's left pointer
+ * Since I know that root2 is not null, I can traverse it's right pointer
+ * root1 = root1->left;
+ * root2 = root2->left;
+ * Calling the same function to assign to resultant's left;
+ *
+ *
+ * root1 = 3, 5, null; root2 = 1, null, 4
+ *
+ * Checked if node1 is not null,
+ * Created a node for the new graph with node1's value
+ * Checked if root2 is not null,
+ * Since resultant exists, I do not have to create another node
+ * Just added the value of root2 to resultant;
+ * result->left = same function(root1->left, root2->left)
+ * result->right = same function(root1->right, root2->right)
+ *  return result
+ *
+ * root1 = 5, null, null; root2 = null
+ * root1 != null, created result
+ * result with value 5
+ * root2 is null so do not care.
+ * result->left = same function with root1 = null, root2 = null
+ *
+ * root1 = null, root2 = null
+ */
 class Solution {
-    TreeNode *mergeTreeWorker(TreeNode *root1, TreeNode *root2,
-                              TreeNode *result) {
-        TreeNode *firstTree = root1;
-        TreeNode *secondTree = root2;
-        bool first = firstTree != nullptr;
-        bool second = secondTree != nullptr;
-        if (first || second) {
-            result = new TreeNode();
-            if (first) {
-                result->val += firstTree->val;
-                firstTree = firstTree->left;
-            }
-            if (second) {
-                result->val += secondTree->val;
-                secondTree = secondTree->left;
-            }
-        }
-        result->left = mergeTreeWorker(firstTree, secondTree, result->left);
-        result->right =
-            mergeTreeWorker(root1->right, root2->right, result->right);
-        return result;
-    }
 
   public:
-    /**
-     * Algorithm Mk1:
-     * Create a new TreeNode * named result(as a class member);
-     * Create two  TreeNode *s named firstTree and secondTree, assign them to
-     * root1 and root2
-     * if(firstTree != nullptr){
-     * 	result->val += firstTree->val;
-     * 	firstTree = firstTree->left;
-     * }
-     * if(secondTree != nullptr){
-     * 	result->val += secondTree->val;
-     * 	secondTree = secondTree->left;
-     * }
-     * result->left = mergeTrees(firstTree, secondTree);
-     * result->right = mergeTrees(firstTree, secondTree);
-     * return result;
-     */
     TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2) {
-        return mergeTreeWorker(root1, root2, nullptr);
+        bool first = root1 == nullptr;
+        bool second = root2 == nullptr;
+        if (first && second) {
+            return nullptr;
+        }
+        TreeNode *firstTree = root1;
+        TreeNode *secondTree = root2;
+        TreeNode *result = new TreeNode();
+        if (!first) {
+            result->val += firstTree->val;
+            firstTree = firstTree->left;
+        }
+        if (!second) {
+            result->val += secondTree->val;
+            secondTree = secondTree->left;
+        }
+        result->left = mergeTrees(firstTree, secondTree);
+        firstTree = !first ? root1->right : nullptr;
+        secondTree = !second ? root2->right : nullptr;
+        result->right = mergeTrees(firstTree, secondTree);
+        return result;
     }
 };
