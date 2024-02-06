@@ -97,26 +97,15 @@ class Solution {
 
   public:
     TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2) {
-        bool first = root1 == nullptr;
-        bool second = root2 == nullptr;
-        if (first && second) {
-            return nullptr;
+        if (root1 == nullptr) {
+            return root2;
         }
-        TreeNode *firstTree = root1;
-        TreeNode *secondTree = root2;
-        TreeNode *result = new TreeNode();
-        if (!first) {
-            result->val += firstTree->val;
-            firstTree = firstTree->left;
+        if (root2 == nullptr) {
+            return root1;
         }
-        if (!second) {
-            result->val += secondTree->val;
-            secondTree = secondTree->left;
-        }
-        result->left = mergeTrees(firstTree, secondTree);
-        firstTree = !first ? root1->right : nullptr;
-        secondTree = !second ? root2->right : nullptr;
-        result->right = mergeTrees(firstTree, secondTree);
-        return result;
+        root1->val += root2->val;
+        root1->left = mergeTrees(root1->left, root2->left);
+        root1->right = mergeTrees(root1->right, root2->right);
+        return root1;
     }
 };
