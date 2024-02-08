@@ -79,11 +79,34 @@ class Node {
 };
 
 class Solution {
+    Node *cloneGraphWorker(Node *node,
+                           std::unordered_map<Node *, Node *> visited) {
+        Node *newNode = new Node(node->val);
+        visited[node] = newNode;
+        std::vector<Node *> newsNeighbors;
+        for (std::vector<Node *>::iterator it = node->neighbors.begin();
+             it != node->neighbors.end(); ++it) {
+            // If the current neighbor is not in visited, visit it.
+            if (visited.find(*it) == visited.end()) {
+                newsNeighbors.push_back(cloneGraphWorker(*it, visited));
+            } else {
+                newsNeighbors.push_back(visited.find(*it)->second);
+            }
+        }
+        newNode->neighbors = newsNeighbors;
+        return newNode;
+    }
+
   public:
     Node *cloneGraph(Node *node) {
-        /*
-
-        */
+        if (node == nullptr) {
+            return nullptr;
+        }
+        if (node->neighbors.size() == 0) {
+            return new Node(node->val);
+        }
+        std::unordered_map<Node *, Node *> visited;
+        return cloneGraphWorker(node, visited);
     }
 };
 
