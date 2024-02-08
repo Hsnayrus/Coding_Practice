@@ -41,60 +41,72 @@ struct TreeNode {
     TreeNode(int x, TreeNode *left, TreeNode *right)
         : val(x), left(left), right(right) {}
 };
-
 /**
- * Algorithm Mk1:
- * Create a new TreeNode * named result(as a class member);
- * Create two  TreeNode *s named firstTree and secondTree, assign them to
- * root1 and root2
- * if(firstTree != nullptr){
- * 	result->val += firstTree->val;
- * 	firstTree = firstTree->left;
- * }
- * if(secondTree != nullptr){
- * 	result->val += secondTree->val;
- * 	secondTree = secondTree->left;
- * }
- * result->left = mergeTrees(firstTree, secondTree);
- * result->right = mergeTrees(firstTree, secondTree);
- * return result;
- * ****Doesn't work****
+ * Dry Run:
+ * Checked that root1 is not null
+ * Checked that root2 is not null
+ * Created a new treenode called result using the default constructor
+ * Added the value of 2 + 3 to the new node
+ * Created a pair of a pair or TreeNode * and a TreeNode ** named leftIter
+ * leftIter.first.first = root1->left(since root1 != nullptr)
+ * leftIter.first.second = root2->right(since root1!= nullptr)
+ * leftIter.second = &tempResult->left;
+ * Created another pair of the same type as above, named rightIter
+ * rightIter.first.first = root1->right(since root1 != nullptr)
+ * rightIter.first.second = root2->right(since root2 != nullptr)
+ * rightIter.second = &tempResult->right;
  *
- * What I did to get the resultant graph:
- * root1 = 1, 3, 2; root2 = 2, 1, 3;
- * I first saw if the first is not null
- * I created a new node since that is the case
- * Checked if the first is not null
- * Since the resultant node is already created I added the value this
- * secondTree's node to the resultant's value
- * Since I know that root1 is not null, I can traverse it's left pointer
- * Since I know that root2 is not null, I can traverse it's right pointer
- * root1 = root1->left;
- * root2 = root2->left;
- * Calling the same function to assign to resultant's left;
+ * Algo mk3:
+ * Check if either tree is null, if it is, return the other one
+ * Create a new Node for the new resultant tree
+ * Create another node named result, use default constructor
+ * Create a stack, nodeStack, of pair of a pair of TreeNode *s and a TreeNode**
+ * nodeStack.push(std::make_pair(std::make_pair(root1, root2), &result))
+ * Run a loop until the stack is empty
  *
- *
- * root1 = 3, 5, null; root2 = 1, null, 4
- *
- * Checked if node1 is not null,
- * Created a node for the new graph with node1's value
- * Checked if root2 is not null,
- * Since resultant exists, I do not have to create another node
- * Just added the value of root2 to resultant;
- * result->left = same function(root1->left, root2->left)
- * result->right = same function(root1->right, root2->right)
- *  return result
- *
- * root1 = 5, null, null; root2 = null
- * root1 != null, created result
- * result with value 5
- * root2 is null so do not care.
- * result->left = same function with root1 = null, root2 = null
- *
- * root1 = null, root2 = null
  */
 class Solution {
+    bool nodePairNull(std::pair<TreeNode *, TreeNode *> nodePair) {
+        return nodePair.first == nullptr && nodePair.second == nullptr;
+    }
 
   public:
-    TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2) {}
+    TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2) {
+        if (root1 == nullptr) {
+            return root2;
+        }
+        if (root2 == nullptr) {
+            return root1;
+        }
+        TreeNode *result = nullptr;
+        std::stack<std::pair<std::pair<TreeNode *, TreeNode *>, TreeNode **> >
+            nodeStack;
+        nodeStack.push(std::make_pair(std::make_pair(root1, root2), &result));
+        while (!nodeStack.empty()) {
+            std::pair<TreeNode *, TreeNode *> nodePair = nodeStack.top().first;
+            TreeNode **tempResult = nodeStack.top().second;
+            nodeStack.pop();
+            if (nodePairNull(nodePair)) {
+                continue;
+            }
+            std::pair<TreeNode *, TreeNode *> leftPair =
+                std::make_pair(nullptr, nullptr);
+            std::pair<TreeNode *, TreeNode *> rightPair =
+                std::make_pair(nullptr, nullptr);
+            *tempResult = new TreeNode();
+            if (nodePair.first == nullptr) {
+                (*tempResult)->val += nodePair.first->val;
+                leftPair.first = nodePair.first->left;
+                rightPair.first = nodePair.first->right;
+            }
+            if (nodePair.second == nullptr) {
+                (*tempResult)->val += nodePair.second->val;
+                leftPair.second = nodePair.second->left;
+                rightPair.second = nodePair.second->right;
+            }
+            nodeStack.push(std::make_pair(leftPair, &((*tempResult)->left)));
+            nodeStack.push(std::make_pair(rightPair, &((*tempResult)->right)));
+        }
+        return result;
+    }
 };
