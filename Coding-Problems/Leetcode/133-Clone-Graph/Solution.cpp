@@ -80,7 +80,7 @@ class Node {
 
 class Solution {
     Node *cloneGraphWorker(Node *node,
-                           std::unordered_map<Node *, Node *> visited) {
+                           std::unordered_map<Node *, Node *> &visited) {
         Node *newNode = new Node(node->val);
         visited[node] = newNode;
         std::vector<Node *> newsNeighbors;
@@ -90,7 +90,7 @@ class Solution {
             if (visited.find(*it) == visited.end()) {
                 newsNeighbors.push_back(cloneGraphWorker(*it, visited));
             } else {
-                newsNeighbors.push_back(visited.find(*it)->second);
+                newsNeighbors.push_back(visited[*it]);
             }
         }
         newNode->neighbors = newsNeighbors;
