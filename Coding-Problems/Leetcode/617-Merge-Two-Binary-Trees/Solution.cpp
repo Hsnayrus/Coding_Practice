@@ -66,47 +66,7 @@ struct TreeNode {
  *
  */
 class Solution {
-    bool nodePairNull(std::pair<TreeNode *, TreeNode *> nodePair) {
-        return nodePair.first == nullptr && nodePair.second == nullptr;
-    }
 
   public:
-    TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2) {
-        if (root1 == nullptr) {
-            return root2;
-        }
-        if (root2 == nullptr) {
-            return root1;
-        }
-        TreeNode *result = nullptr;
-        std::stack<std::pair<std::pair<TreeNode *, TreeNode *>, TreeNode **> >
-            nodeStack;
-        nodeStack.push(std::make_pair(std::make_pair(root1, root2), &result));
-        while (!nodeStack.empty()) {
-            std::pair<TreeNode *, TreeNode *> nodePair = nodeStack.top().first;
-            TreeNode **tempResult = nodeStack.top().second;
-            nodeStack.pop();
-            if (nodePairNull(nodePair)) {
-                continue;
-            }
-            std::pair<TreeNode *, TreeNode *> leftPair =
-                std::make_pair(nullptr, nullptr);
-            std::pair<TreeNode *, TreeNode *> rightPair =
-                std::make_pair(nullptr, nullptr);
-            *tempResult = new TreeNode();
-            if (nodePair.first == nullptr) {
-                (*tempResult)->val += nodePair.first->val;
-                leftPair.first = nodePair.first->left;
-                rightPair.first = nodePair.first->right;
-            }
-            if (nodePair.second == nullptr) {
-                (*tempResult)->val += nodePair.second->val;
-                leftPair.second = nodePair.second->left;
-                rightPair.second = nodePair.second->right;
-            }
-            nodeStack.push(std::make_pair(leftPair, &((*tempResult)->left)));
-            nodeStack.push(std::make_pair(rightPair, &((*tempResult)->right)));
-        }
-        return result;
-    }
+    TreeNode *mergeTrees(TreeNode *root1, TreeNode *root2) {}
 };
