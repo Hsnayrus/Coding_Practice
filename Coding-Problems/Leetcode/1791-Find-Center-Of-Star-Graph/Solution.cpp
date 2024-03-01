@@ -33,5 +33,37 @@ The given edges represent a valid star graph.
  */
 class Solution {
   public:
-    int findCenter(vector<vector<int> >& edges) {}
+    /**
+     * Algorithm Mark1:
+     * Create a hashmap where key is the node value and value is the number
+     * of times the node has appeared, call it frequency
+     * Iterate through the graph of edges
+     * Increase the count of each edge
+     * If count of any edge crosses 2, return that edge
+     *
+     */
+    int findCenter(std::vector<std::vector<int> >& edges) {
+        std::unordered_map<int, int> frequencyMap;
+        int result = INT_MIN;
+        for (std::vector<std::vector<int> >::iterator it = edges.begin();
+             it != edges.end(); it++) {
+            // Couldn't find element
+            for (std::vector<int>::iterator edgesIterator = it->begin();
+                 edgesIterator != it->end(); edgesIterator++) {
+                if (frequencyMap.find(*edgesIterator) == frequencyMap.end()) {
+                    // New entry
+                    frequencyMap[*edgesIterator] = 1;
+                } else {
+                    result = *edgesIterator;
+                    break;
+                }
+            }
+        }
+        return result;
+    }
 };
+
+int main() {
+    std::cout << "ello orld\n";
+    return EXIT_SUCCESS;
+}
