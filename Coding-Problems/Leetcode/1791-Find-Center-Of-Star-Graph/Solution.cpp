@@ -43,23 +43,23 @@ class Solution {
      *
      */
     int findCenter(std::vector<std::vector<int> >& edges) {
-        std::unordered_map<int, int> frequencyMap;
-        int result = INT_MIN;
-        for (std::vector<std::vector<int> >::iterator it = edges.begin();
-             it != edges.end(); it++) {
-            // Couldn't find element
-            for (std::vector<int>::iterator edgesIterator = it->begin();
-                 edgesIterator != it->end(); edgesIterator++) {
-                if (frequencyMap.find(*edgesIterator) == frequencyMap.end()) {
-                    // New entry
-                    frequencyMap[*edgesIterator] = 1;
-                } else {
-                    result = *edgesIterator;
+        std::set<int> frequencySet;
+        std::set<int>::iterator result = frequencySet.end();
+        for (std::vector<std::vector<int> >::iterator edgesIt = edges.begin();
+             edgesIt != edges.end(); ++edgesIt) {
+            for (size_t i = 0; i < 2; i++) {
+                std::pair<std::set<int>::iterator, bool> insertResult =
+                    frequencySet.insert((*edgesIt)[i]);
+                if (!insertResult.second) {
+                    result = insertResult.first;
                     break;
                 }
             }
+            if (result != frequencySet.end()) {
+                break;
+            }
         }
-        return result;
+        return *result;
     }
 };
 
