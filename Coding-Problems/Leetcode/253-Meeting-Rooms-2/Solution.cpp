@@ -36,7 +36,7 @@ void Solution::findMeetingSlot(vector<int>& endTimes,
     for (size_t i = 0; i < endTimes.size(); i++) {
         // currentMeeting[0] is the start time, currentMeeting[1] is the end
         // time
-        if (endTimes[i] < currentMeeting[0]) {
+        if (endTimes[i] <= currentMeeting[0]) {
             endTimes[i] = currentMeeting[1];
             newMeeting = false;
         }
@@ -46,11 +46,16 @@ void Solution::findMeetingSlot(vector<int>& endTimes,
     }
 }
 
+bool intervalComparator(vector<int>& left, vector<int>& right) {
+    return left[0] <= right[0];
+}
+
 int Solution::minMeetingRooms(vector<vector<int> >& intervals) {
     vector<int> endTimes;
+    std::sort(intervals.begin(), intervals.end(), intervalComparator);
     for (vector<vector<int> >::iterator meetingIt = intervals.begin();
          meetingIt != intervals.end(); ++meetingIt) {
-        findMeetingSlot(*meetingIt, endTimes);
+        findMeetingSlot(endTimes, *meetingIt);
     }
     return endTimes.size();
 }
