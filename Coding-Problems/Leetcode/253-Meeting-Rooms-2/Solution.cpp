@@ -22,6 +22,25 @@ Constraints:
 1 <= intervals.length <= 104
 0 <= starti < endi <= 106
  */
+
+/**
+ * Algo Mk1:
+ * Sort the intervals array based on their start times
+ * Create another array called endTimes
+ * Iterate through the array intervals
+ * Find a Slot for the i^(th) meeting
+ * Return the size of the endTimes array
+ *
+ *
+ * Find a Slot for Meeting:
+ * takes a reference to the endTimes array
+ * another argument is the current meeting
+ * Iterate through the endTimes array
+ * If the i^(th) endTime is less than the current meetings start Time, then
+ * replace that endtime with the current meeting's end Time
+ * Else add another entry to the endTimes array with the current endTime
+ *
+ */
 using std::vector;
 class Solution {
     void findMeetingSlot(vector<int>& endTimes, vector<int>& currentMeeting);
@@ -36,9 +55,10 @@ void Solution::findMeetingSlot(vector<int>& endTimes,
     for (size_t i = 0; i < endTimes.size(); i++) {
         // currentMeeting[0] is the start time, currentMeeting[1] is the end
         // time
-        if (endTimes[i] <= currentMeeting[0]) {
+        if (currentMeeting[0] >= endTimes[i]) {
             endTimes[i] = currentMeeting[1];
             newMeeting = false;
+            break;
         }
     }
     if (newMeeting) {
@@ -59,21 +79,3 @@ int Solution::minMeetingRooms(vector<vector<int> >& intervals) {
     }
     return endTimes.size();
 }
-/**
- * Algo Mk1:
- * Sort the intervals array based on their start times
- * Create another array called endTimes
- * Iterate through the array intervals
- * Find a Slot for the i^(th) meeting
- * Return the size of the endTimes array
- *
- *
- * Find a Slot for Meeting:
- * takes a reference to the endTimes array
- * another argument is the current meeting
- * Iterate through the endTimes array
- * If the i^(th) endTime is less than the current meetings start Time, then
- * replace that endtime with the current meeting's end Time
- * Else add another entry to the endTimes array with the current endTime
- *
- */
