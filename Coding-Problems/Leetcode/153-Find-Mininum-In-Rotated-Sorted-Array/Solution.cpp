@@ -43,5 +43,17 @@ nums is sorted and rotated between 1 and n times.
 using std::vector;
 class Solution {
   public:
-    int findMin(vector<int>& nums) {}
+    int findMin(vector<int>& nums) {
+        if (nums.size() == 0) {
+            return 0;
+        }
+        int min = nums[0];
+        for (size_t i = 0; i < nums.size() - 1; i++) {
+            if (nums[i] > nums[i + 1]) {
+                min = nums[i + 1];
+                break;
+            }
+        }
+        return min;
+    }
 };
