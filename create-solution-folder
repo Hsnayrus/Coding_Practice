@@ -69,8 +69,12 @@ function parsePlatformValue(){
             platform="HackerRank"
             platformSf="hr"
             ;;
+        nc|neetcode)
+            platform="NeetCode"
+            platformSf="nc"
+            ;;
         *)
-            throwError "Invalid platform value provided. Accepted values are Leetcode, GeeksForGeeks, HackerRank, CodingNinjas, or their shortforms"
+            throwError "Invalid platform value provided. Accepted values are Leetcode, GeeksForGeeks, HackerRank, CodingNinjas, NeetCode, or their shortforms"
             ;;
     esac
     subParentFolder="${platform}/"
