@@ -1,7 +1,0 @@
-solution
-*~
-*.dSYM* 
-solution 
-*.cpp~ 
-*.hpp~
-*.vscode
