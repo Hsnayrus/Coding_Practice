@@ -25,3 +25,14 @@ Constraints:
 
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
+        s = sorted(s)
+        t = sorted(t)
+        return s == t
+
+
+if __name__ == "__main__":
+    s1 = Solution()
+    print(s1.isAnagram("racecar", "carrace"))
+    print(s1.isAnagram("bhosadike", "dikebhos"))
+    print(s1.isAnagram("no", "yes"))
+    print(s1.isAnagram("", ""))
