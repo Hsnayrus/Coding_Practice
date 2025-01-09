@@ -38,3 +38,19 @@ Constraints:
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
+        result_index = []
+        for i in range(0, len(nums)):
+            result_index = []
+            for j in range(0, len(nums)):
+                if i != j and (nums[i] + nums[j] == target):
+                    result_index.append(i)
+                    result_index.append(j)
+                    return result_index
+        return []
+
+
+if __name__ == "__main__":
+    s1 = Solution()
+    print(s1.twoSum([3, 4, 5, 6], 7))
+    print(s1.twoSum([4, 5, 6], 10))
+    print(s1.twoSum([5, 5], 10))
