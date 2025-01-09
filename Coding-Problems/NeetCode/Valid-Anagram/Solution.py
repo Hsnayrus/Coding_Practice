@@ -24,10 +24,19 @@ Constraints:
 
 
 class Solution:
+    def getCharacterFrequency(self, s: str) -> dict:
+        result = {}
+        for char in s:
+            if result.get(char):
+                result[char] += 1
+            else:
+                result[char] = 1
+        return result
+
     def isAnagram(self, s: str, t: str) -> bool:
-        s = sorted(s)
-        t = sorted(t)
-        return s == t
+        s_dict = self.getCharacterFrequency(s)
+        t_dict = self.getCharacterFrequency(t)
+        return s_dict == t_dict
 
 
 if __name__ == "__main__":
