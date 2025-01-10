@@ -49,11 +49,18 @@ Algo:
 
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        if root == None:
+        if not root:
             return
-        temp = root.left
-        root.left = root.right
-        root.right = temp
-        self.invertTree(root.left)
-        self.invertTree(root.right)
+
+        stack = [root]
+        while len(stack) != 0:
+            current = stack.pop()
+            temp = current.left
+            current.left = current.right
+            current.right = temp
+
+            if current.left:
+                stack.append(current.left)
+            if current.right:
+                stack.append(current.right)
         return root
