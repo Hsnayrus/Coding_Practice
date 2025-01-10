@@ -39,3 +39,27 @@ Constraints:
 
 class Solution:
     def isValid(self, s: str) -> bool:
+        if len(s) % 2 != 0 or len(s) < 2:
+            return False
+
+        bracket_map = {
+            '(': ')',
+            '[': ']',
+            '{': '}'
+        }
+        visited = []
+        for b in s:
+            # This is a closing bracket
+            if b not in bracket_map:
+                if len(visited) == 0:
+                    return False
+                elif bracket_map[visited[len(visited) - 1]] != b:
+                    # Unmatched, bracket, return False
+                    return False
+                else:
+                    # Matched the closing bracket with a corresponding open bracket
+                    visited.pop()
+            else:
+                visited.append(b)
+
+        return visited == []
