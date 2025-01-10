@@ -51,6 +51,7 @@ class Solution:
         for b in s:
             # This is a closing bracket
             if b not in bracket_map:
+                # The first bracket is a closed one
                 if len(visited) == 0:
                     return False
                 elif bracket_map[visited[len(visited) - 1]] != b:
