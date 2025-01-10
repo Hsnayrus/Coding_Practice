@@ -36,5 +36,24 @@ class TreeNode:
         self.right = right
 
 
+"""
+Algo:
+- If the current node is null, return
+- swap left and right
+- invertTree(root->left)
+- invertTree(root->right)
+- return root
+
+"""
+
+
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if root == None:
+            return
+        temp = root.left
+        root.left = root.right
+        root.right = temp
+        self.invertTree(root.left)
+        self.invertTree(root.right)
+        return root
