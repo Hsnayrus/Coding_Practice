@@ -37,4 +37,17 @@ class Solution:
         if not root:
             return 0
 
-        return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+        stack = [[root, 1]]
+        result = 0
+
+        while len(stack) != 0:
+            node, depth = stack.pop()
+
+            if node.left:
+                stack.append([node.left, depth + 1])
+            if node.right:
+                stack.append([node.right, depth + 1])
+
+            result = max(result, depth)
+
+        return result
