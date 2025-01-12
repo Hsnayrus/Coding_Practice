@@ -23,6 +23,7 @@ Constraints:
 
 """
 # Definition for a binary tree node.
+from collections import *
 
 
 class TreeNode:
@@ -37,17 +38,17 @@ class Solution:
         if not root:
             return 0
 
-        stack = [[root, 1]]
-        result = 0
+        queue = deque()
 
-        while len(stack) != 0:
-            node, depth = stack.pop()
+        queue.append(root)
+        level = 0
 
-            if node.left:
-                stack.append([node.left, depth + 1])
-            if node.right:
-                stack.append([node.right, depth + 1])
-
-            result = max(result, depth)
-
-        return result
+        while queue:
+            for i in range(len(queue)):
+                current = queue.popleft()
+                if current.left:
+                    queue.append(current.left)
+                if current.right:
+                    queue.append(current.right)
+            level += 1
+        return level
