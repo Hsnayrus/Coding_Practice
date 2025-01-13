@@ -53,4 +53,15 @@ class TreeNode:
 
 
 class Solution:
+    def dfs(self, root: Optional[TreeNode], items: List[int]) -> List[int]:
+        if not root:
+            return
+
+        self.dfs(root.left, items)
+        items.append(root.val)
+        self.dfs(root.right, items)
+
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        result = []
+        self.dfs(root, result)
+        return result
