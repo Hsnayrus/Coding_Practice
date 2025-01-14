@@ -44,6 +44,8 @@ Follow up: Recursive solution is trivial, could you do it iteratively?
 """
 # Definition for a binary tree node.
 
+from collections import deque
+
 
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -53,15 +55,20 @@ class TreeNode:
 
 
 class Solution:
-    def dfs(self, root: Optional[TreeNode], items: List[int]) -> List[int]:
-        if not root:
-            return
-
-        self.dfs(root.left, items)
-        items.append(root.val)
-        self.dfs(root.right, items)
-
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+
         result = []
-        self.dfs(root, result)
+        stack = []
+        current = root
+
+        while current or stack:
+            while current:
+                stack.append(current)
+                current = current.left
+            current = stack.pop()
+            result.append(current.val)
+            current = current.right
+
         return result
