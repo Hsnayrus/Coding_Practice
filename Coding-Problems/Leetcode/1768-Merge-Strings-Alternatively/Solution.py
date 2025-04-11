@@ -128,15 +128,15 @@ class Solution:
         if word2 == "":
             return word1
         i = 0
-        result = ""
+        result = []
         while True:
-            result += word1[i]
-            result += word2[i]
+            result.append(word1[i])
+            result.append(word2[i])
             i += 1
             if i == len(word1) or i == len(word2):
                 break
         if i == len(word1):
-            result += word2[i:]
+            result.append(word2[i:])
         else:
-            result += word1[i:]
-        return result
+            result.append(word1[i:])
+        return "".join(result)
