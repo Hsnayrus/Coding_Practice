@@ -15,10 +15,6 @@ class SinglyLinkedList():
     def head(self):
         return self._head
 
-    @head.setter
-    def head(self, new_head=None):
-        self._head = new_head
-
     @property
     def size(self):
         return self._size
