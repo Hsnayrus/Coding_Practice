@@ -7,8 +7,8 @@ class SinglyLinkedList():
             self.data = data
             self.next = next
 
-    def __init__(self, data=None):
-        self._head = self._Node(data=data)
+    def __init__(self):
+        self._head = None
         self._size = 0
 
     @property
@@ -35,10 +35,3 @@ class SinglyLinkedList():
                 result += "\n"
             temp = temp.next
         return result
-
-
-if __name__ == "__main__":
-    my_list = SinglyLinkedList(5)
-    print(str(my_list))
-    my_list.add_front(4)
-    print(str(my_list))
