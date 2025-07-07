@@ -26,6 +26,17 @@ class SinglyLinkedList():
         self._head = self._Node(data=data, next=self._head)
         self._size += 1
 
+    def add_back(self, data):
+        new_node = self._Node(data=data, next=None)
+        if self._head is None:
+            self._head = new_node
+        else:
+            temp = self._head
+            while temp.next is not None:
+                temp = temp.next
+            temp.next = new_node
+        self._size += 1
+
     def __len__(self):
         return self._size
 
@@ -92,3 +103,10 @@ class DoublyLinkedList():
         else:
             self._tail = self._head
         self._size += 1
+
+    def add_back(self, data):
+        self._tail = self._Node(data=data, next=None, prev=self._tail)
+        if self._tail.prev is not None:
+            self._tail.prev.next = self._tail
+        else:
+            self._head = self._tail
