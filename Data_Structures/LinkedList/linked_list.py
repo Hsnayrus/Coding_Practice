@@ -7,6 +7,9 @@ class SinglyLinkedList():
             self.data = data
             self.next = next
 
+        def __str__(self):
+            return str(self.data)
+
     def __init__(self):
         self._head = None
         self._size = 0
@@ -43,6 +46,9 @@ class DoublyLinkedList():
             self.data = data
             self.next = next
             self.prev = prev
+
+        def __str__(self):
+            return str(self.data)
 
     def __init__(self):
         self._head = None
