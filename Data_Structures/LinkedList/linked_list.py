@@ -154,3 +154,16 @@ class DoublyLinkedList():
             result.prev = None
         self._size -= 1
         return result
+
+    def remove_front(self):
+        if self._head is None:
+            return None
+        result = self._head
+        self._head = self._head.next
+        if self._head == None:
+            self._tail = None
+        else:
+            self._head.prev = None
+            result.next = None
+        self._size -= 1
+        return result
