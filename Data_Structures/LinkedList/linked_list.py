@@ -49,11 +49,13 @@ class SinglyLinkedList():
             else:
                 current = current.next
         if current is None:
+            result = self._head
             self._head = None
             self._size -= 1
-            return None
-        result = current.next = None
-        self._size -= 1
+        else:
+            result = current.next
+            current.next = None
+            self._size -= 1
         return result
 
     def __len__(self):
