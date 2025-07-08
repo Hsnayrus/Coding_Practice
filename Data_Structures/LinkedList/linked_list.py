@@ -140,3 +140,17 @@ class DoublyLinkedList():
             self._tail.prev.next = self._tail
         else:
             self._head = self._tail
+
+    def remove_back(self):
+        # Empty List
+        if self._tail is None:
+            return None
+        result = self._tail
+        self._tail = self._tail.prev
+        if self._tail is None:
+            self._head = None
+        else:
+            self._tail.next = None
+            result.prev = None
+        self._size -= 1
+        return result
