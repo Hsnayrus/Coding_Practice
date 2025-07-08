@@ -135,6 +135,7 @@ class DoublyLinkedList():
 
     def add_back(self, data):
         self._tail = self._Node(data=data, next=None, prev=self._tail)
+        self._size += 1
         if self._tail.prev is not None:
             self._tail.prev.next = self._tail
         else:
