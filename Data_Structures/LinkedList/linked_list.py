@@ -64,7 +64,28 @@ class SinglyLinkedList():
         result = self._head
         self._head = result.next
         result.next = None
+        self._size -= 1
         return result
+
+    def remove(self, data):
+        if data is None or self._head is None:
+            return None
+        current = self._head
+        prev = None
+        while current is not None:
+            if current.data == data:
+                break
+            if prev is None:
+                prev = self._head
+            else:
+                prev = prev.next
+            current = current.next
+        if prev is None:
+            return self.remove_front()
+        prev.next = current.next
+        current.next = None
+        self._size -= 1
+        return current
 
     def __len__(self):
         return self._size
