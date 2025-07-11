@@ -188,3 +188,22 @@ class DoublyLinkedList():
             result.next = None
         self._size -= 1
         return result
+
+    def remove(self, data):
+        if data is None or self._head is None:
+            return None
+        current = self._head
+        while current is not None:
+            if current.data == data:
+                break
+            current = current.next
+        if current.prev == None:
+            return self.remove_front()
+        if current.next == None:
+            return self.remove_back()
+        current.prev.next = current.next
+        current.next.prev = current.prev
+        current.next = None
+        current.prev = None
+        self._size -= 1
+        return current
