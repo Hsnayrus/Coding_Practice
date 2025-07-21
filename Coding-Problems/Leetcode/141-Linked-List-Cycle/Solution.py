@@ -47,16 +47,20 @@ class ListNode:
         self.next = None
 
 
-# Runtime: 849 ms, 6.11%ile
-# Memory: 20.05 MB, 17.38 %ile
+# # Naive Solution
+# # Runtime: 849 ms, 6.11%ile
+# # Memory: 20.05 MB, 17.38 %ile
+# class Solution:
+#     def hasCycle(self, head: Optional[ListNode]) -> bool:
+#         visited = []
+#         current = head
+#         while current is not None:
+#             if current not in visited:
+#                 visited.append(current)
+#             else:
+#                 return True
+#             current = current.next
+#         return False
+
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        visited = []
-        current = head
-        while current is not None:
-            if current not in visited:
-                visited.append(current)
-            else:
-                return True
-            current = current.next
-        return False
