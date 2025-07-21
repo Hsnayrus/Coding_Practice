@@ -62,6 +62,9 @@ class ListNode:
 #             current = current.next
 #         return False
 
+# Runtime: 49ms, 51.69%ile
+# Memory: 19.81MB, 56.87%ile
+# Ideal solution I think
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         if not head or not head.next or not head.next.next:
