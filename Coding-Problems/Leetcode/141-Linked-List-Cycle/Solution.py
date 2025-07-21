@@ -47,6 +47,8 @@ class ListNode:
         self.next = None
 
 
+# Runtime: 849 ms, 6.11%ile
+# Memory: 20.05 MB, 17.38 %ile
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
         visited = []
