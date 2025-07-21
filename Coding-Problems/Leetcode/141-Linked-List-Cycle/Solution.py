@@ -56,4 +56,5 @@ class Solution:
                 visited.append(current)
             else:
                 return True
+            current = current.next
         return False
