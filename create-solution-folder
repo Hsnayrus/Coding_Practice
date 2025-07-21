@@ -247,7 +247,7 @@ function createCodingProblemFolder(){
 
 function convertUnderlinesToUnderscores(){
     local -n title="$1"
-    title=$(echo $title | awk -F '-' '{for(i=1;i<=NF;i++) $i=tolower(substr($i,1))}1' OFS="_")
+    title=$(echo $title | awk -F '-' '{for(i=1;i<=NF;i++) $i=tolower(substr($i,1))}1' OFS="-")
     echo "$title"
 }
 
@@ -403,7 +403,6 @@ function main(){
 
 # Call main and pass all the arguments from the command line
 main $@
-
 
 
 ################################################################################
