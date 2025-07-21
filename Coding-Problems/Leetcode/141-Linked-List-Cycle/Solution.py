@@ -49,3 +49,11 @@ class ListNode:
 
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
+        visited = []
+        current = head
+        while current is not None:
+            if current not in visited:
+                visited.append(current)
+            else:
+                return True
+        return False
