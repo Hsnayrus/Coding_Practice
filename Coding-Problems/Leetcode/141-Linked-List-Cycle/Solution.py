@@ -62,20 +62,36 @@ class ListNode:
 #             current = current.next
 #         return False
 
-# Runtime: 49ms, 51.69%ile
-# Memory: 19.81MB, 56.87%ile
-# Ideal solution I think
+# # Runtime: 49ms, 51.69%ile
+# # Memory: 19.81MB, 56.87%ile
+# # Ideal solution I think
+# class Solution:
+#     def hasCycle(self, head: Optional[ListNode]) -> bool:
+#         if not head or not head.next or not head.next.next:
+#             return False
+#         slow = head
+#         fast = head.next.next
+
+#         while fast.next is not None and fast.next.next is not None:
+#             if fast == slow:
+#                 return True
+#             slow = slow.next
+#             fast = fast.next.next
+
+#         return False
+
+# Runtime: 46ms, 71.67%ile
+# Memory: 19.72MB, 85.99%ile
+# Proper Ideal solution according to leetcode
 class Solution:
     def hasCycle(self, head: Optional[ListNode]) -> bool:
-        if not head or not head.next or not head.next.next:
-            return False
         slow = head
-        fast = head.next.next
+        fast = head
 
-        while fast.next is not None and fast.next.next is not None:
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
             if fast == slow:
                 return True
-            slow = slow.next
-            fast = fast.next.next
 
         return False
