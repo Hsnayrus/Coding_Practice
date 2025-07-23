@@ -71,3 +71,37 @@ class ListNode:
 #                 tail.next = ListNode(elem)
 #                 tail = tail.next
 #         return result
+
+class Solution:
+
+    def add_node(self, val):
+        node_to_add = ListNode(val)
+        if not self.head:
+            self.head = node_to_add
+            self.tail = self.head
+        else:
+            self.tail.next = node_to_add
+            self.tail = self.tail.next
+
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        self.head = None
+        self.tail = self.head
+        while list1 and list2:
+            greater = None
+            if list1.val < list2.val:
+                greater = list1.val
+                list1 = list1.next
+            else:
+                greater = list2.val
+                list2 = list2.next
+            self.add_node(greater)
+
+        while list1:
+            self.add_node(list1.val)
+            list1 = list1.next
+
+        while list2:
+            self.add_node(list2.val)
+            list2 = list2.next
+
+        return self.head
