@@ -37,33 +37,37 @@ class ListNode:
         self.val = val
         self.next = next
 
+# # Naive Solution
+# # Runtime: 0ms, 100%ile
+# # Memory: 17.78MB, 61.32%ile
 
-class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        res_list = []
-        while list1 and list2:
-            if list1.val < list2.val:
-                res_list.append(list1.val)
-                list1 = list1.next
-            else:
-                res_list.append(list2.val)
-                list2 = list2.next
 
-        while list1:
-            res_list.append(list1.val)
-            list1 = list1.next
+# class Solution:
+#     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+#         res_list = []
+#         while list1 and list2:
+#             if list1.val < list2.val:
+#                 res_list.append(list1.val)
+#                 list1 = list1.next
+#             else:
+#                 res_list.append(list2.val)
+#                 list2 = list2.next
 
-        while list2:
-            res_list.append(list2.val)
-            list2 = list2.next
+#         while list1:
+#             res_list.append(list1.val)
+#             list1 = list1.next
 
-        result = None
-        tail = None
-        for elem in res_list:
-            if not result:
-                result = ListNode(elem)
-                tail = result
-            else:
-                tail.next = ListNode(elem)
-                tail = tail.next
-        return result
+#         while list2:
+#             res_list.append(list2.val)
+#             list2 = list2.next
+
+#         result = None
+#         tail = None
+#         for elem in res_list:
+#             if not result:
+#                 result = ListNode(elem)
+#                 tail = result
+#             else:
+#                 tail.next = ListNode(elem)
+#                 tail = tail.next
+#         return result
